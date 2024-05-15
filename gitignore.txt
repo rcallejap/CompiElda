@@ -1,0 +1,15 @@
+# Ignore compiled Antlr files
+*.interp
+*.tokens
+*.pyc
+
+# Ignore generated Python files
+__pycache__/
+*.pyc
+
+# Ignore Antlr generated files
+*.java
+*.class
+
+# Ignore virtual environment
+venv/
