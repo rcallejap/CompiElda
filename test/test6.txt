@@ -1,0 +1,12 @@
+program programa6;
+    var a, b : int;
+    main {
+        a = 0;
+        b = 10;
+
+        do { 
+            a = a + 1  ;
+            }
+        while ( a < 10 );
+    
+     } end

@@ -1,0 +1,4 @@
+program programa1;
+    main {
+    
+    } end

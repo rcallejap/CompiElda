@@ -1,0 +1,38 @@
+program programaI;
+            var global1, global2 : int;
+
+            
+            void funcion1 (x : float, y : float)[
+                var a, b, c : float;
+                {
+                    a = x * 10;
+                    b = y * 20;
+                    if (a / 5 < a * 5) {
+                        c = 100;
+                    } else {
+                        c = 0;
+                    };
+                    printf(c);
+                }
+            ];
+            
+            void funcion2 (x : float, y : float)[
+                var a, b, c : float;
+                {
+                    a = x;
+                    b = y;
+                    c = a + b;
+                }
+            ];
+            
+            main {
+                global1 = 1.0;
+                global2 = 1.0;
+                
+                do { funcion1(global1, global2); }
+                while ( a - 1 );
+                
+                funcion2(global1, global2);
+                
+                printf(global1, global2, "TEST_TEXT" );
+            } end

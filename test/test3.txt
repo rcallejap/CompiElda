@@ -1,0 +1,4 @@
+program programa3;
+    main {
+        printf("TEST_TEXT" );
+    } end

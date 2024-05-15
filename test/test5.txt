@@ -1,0 +1,17 @@
+program programa5;
+    var a, b : int;  
+    main {
+        a=1;
+        b=2; 
+
+        if (a > 5){
+            a = a + b;
+        }
+        else {
+            b = a + b;
+
+        };
+
+
+    
+    } end

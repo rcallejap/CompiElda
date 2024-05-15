@@ -1,0 +1,5 @@
+program programa2 ;
+    var b : int;
+    main {  
+        b = 5;
+    } end
