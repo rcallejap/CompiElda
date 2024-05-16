@@ -5,26 +5,76 @@ if "." in __name__:
 else:
     from little_duckParser import little_duckParser
 
+from data_structures import Variable, VarTable, Function, FunctionDirectory
+
+
 # This class defines a complete listener for a parse tree produced by little_duckParser.
 class little_duckListener(ParseTreeListener):
+    
+    def __init__(self):
+        self.function_directory = FunctionDirectory()
+        self.current_function = ""
+        self.current_type = None
+        self.current_var_arr = []
+
+
 
     # Enter a parse tree produced by little_duckParser#start_.
     def enterStart_(self, ctx:little_duckParser.Start_Context):
+        self.current_function = "global"
+        
         pass
 
     # Exit a parse tree produced by little_duckParser#start_.
     def exitStart_(self, ctx:little_duckParser.Start_Context):
+        self.function_directory.test_print()
         pass
+
+
+
 
 
     # Enter a parse tree produced by little_duckParser#vars.
     def enterVars(self, ctx:little_duckParser.VarsContext):
+    
         pass
 
     # Exit a parse tree produced by little_duckParser#vars.
     def exitVars(self, ctx:little_duckParser.VarsContext):
+        for varname in self.current_var_arr:
+            self.function_directory.add_variable(Variable(varname, self.current_type), self.current_function)
+        self.current_var_arr = []
         pass
 
+    # Exit a parse tree produced by little_duckParser#var1.
+    def exitVar1(self, ctx:little_duckParser.Var1Context):
+        varname = ctx.ID().getText()
+        self.current_var_arr.append(varname)
+        pass
+
+
+    # Exit a parse tree produced by little_duckParser#type.
+    def exitType(self, ctx:little_duckParser.TypeContext):
+        self.current_type = ctx.getText()   
+        pass
+
+    # Enter a parse tree produced by little_duckParser#funcs.
+    def enterFuncs(self, ctx:little_duckParser.FuncsContext):
+        funcName = ctx.ID().getText()
+        self.function_directory.add_function(funcName)
+        self.current_function = funcName
+
+        pass
+
+    # Exit a parse tree produced by little_duckParser#funcs.
+    def exitFuncs(self, ctx:little_duckParser.FuncsContext):
+        self.current_function = "global"
+        pass
+
+
+
+
+    '''no usadas todavia '''
 
     # Enter a parse tree produced by little_duckParser#var0.
     def enterVar0(self, ctx:little_duckParser.Var0Context):
@@ -39,11 +89,6 @@ class little_duckListener(ParseTreeListener):
     def enterVar1(self, ctx:little_duckParser.Var1Context):
         pass
 
-    # Exit a parse tree produced by little_duckParser#var1.
-    def exitVar1(self, ctx:little_duckParser.Var1Context):
-        pass
-
-
     # Enter a parse tree produced by little_duckParser#var2.
     def enterVar2(self, ctx:little_duckParser.Var2Context):
         pass
@@ -56,11 +101,6 @@ class little_duckListener(ParseTreeListener):
     # Enter a parse tree produced by little_duckParser#type.
     def enterType(self, ctx:little_duckParser.TypeContext):
         pass
-
-    # Exit a parse tree produced by little_duckParser#type.
-    def exitType(self, ctx:little_duckParser.TypeContext):
-        pass
-
 
     # Enter a parse tree produced by little_duckParser#body.
     def enterBody(self, ctx:little_duckParser.BodyContext):
@@ -258,16 +298,6 @@ class little_duckListener(ParseTreeListener):
     # Exit a parse tree produced by little_duckParser#factor1.
     def exitFactor1(self, ctx:little_duckParser.Factor1Context):
         pass
-
-
-    # Enter a parse tree produced by little_duckParser#funcs.
-    def enterFuncs(self, ctx:little_duckParser.FuncsContext):
-        pass
-
-    # Exit a parse tree produced by little_duckParser#funcs.
-    def exitFuncs(self, ctx:little_duckParser.FuncsContext):
-        pass
-
 
     # Enter a parse tree produced by little_duckParser#funcs0.
     def enterFuncs0(self, ctx:little_duckParser.Funcs0Context):
