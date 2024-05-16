@@ -17,36 +17,20 @@ class little_duckListener(ParseTreeListener):
         self.current_type = None
         self.current_var_arr = []
 
-
-
     # Enter a parse tree produced by little_duckParser#start_.
+
     def enterStart_(self, ctx:little_duckParser.Start_Context):
-        self.current_function = "global"
-        
+        self.current_function = "global" 
         pass
 
     # Exit a parse tree produced by little_duckParser#start_.
+    # print de prueba para mostrar el contenido del directorio de funciones y las variables de cada funcion
     def exitStart_(self, ctx:little_duckParser.Start_Context):
         self.function_directory.test_print()
         pass
 
-
-
-
-
-    # Enter a parse tree produced by little_duckParser#vars.
-    def enterVars(self, ctx:little_duckParser.VarsContext):
-    
-        pass
-
-    # Exit a parse tree produced by little_duckParser#vars.
-    def exitVars(self, ctx:little_duckParser.VarsContext):
-        for varname in self.current_var_arr:
-            self.function_directory.add_variable(Variable(varname, self.current_type), self.current_function)
-        self.current_var_arr = []
-        pass
-
     # Exit a parse tree produced by little_duckParser#var1.
+    # Se agrega el nombre de la variable a la lista de variables actuales
     def exitVar1(self, ctx:little_duckParser.Var1Context):
         varname = ctx.ID().getText()
         self.current_var_arr.append(varname)
@@ -54,11 +38,17 @@ class little_duckListener(ParseTreeListener):
 
 
     # Exit a parse tree produced by little_duckParser#type.
+    # Se asigna el tipo de variable a la variable current_type
+    # Se agregan las variables a la tabla de variables de la funcion actual y al terminar se eliminan la lista de variables actuales
     def exitType(self, ctx:little_duckParser.TypeContext):
         self.current_type = ctx.getText()   
+        for varname in self.current_var_arr:
+            self.function_directory.add_variable(Variable(varname, self.current_type), self.current_function)
+        self.current_var_arr = []
         pass
 
     # Enter a parse tree produced by little_duckParser#funcs.
+    # Entrando a FUNCS se crea una nueva funcion en el directorio de funciones y se asigna a la variable current_function
     def enterFuncs(self, ctx:little_duckParser.FuncsContext):
         funcName = ctx.ID().getText()
         self.function_directory.add_function(funcName)
@@ -67,6 +57,7 @@ class little_duckListener(ParseTreeListener):
         pass
 
     # Exit a parse tree produced by little_duckParser#funcs.
+    # Saliendo de FUNCS se limpia la variable current_function
     def exitFuncs(self, ctx:little_duckParser.FuncsContext):
         self.current_function = "global"
         pass
@@ -75,6 +66,15 @@ class little_duckListener(ParseTreeListener):
 
 
     '''no usadas todavia '''
+    # Enter a parse tree produced by little_duckParser#vars.
+    def enterVars(self, ctx:little_duckParser.VarsContext):
+    
+        pass
+
+    # Exit a parse tree produced by little_duckParser#vars.
+    def exitVars(self, ctx:little_duckParser.VarsContext):
+
+        pass
 
     # Enter a parse tree produced by little_duckParser#var0.
     def enterVar0(self, ctx:little_duckParser.Var0Context):

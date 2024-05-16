@@ -3,7 +3,8 @@ program programaI;
 
             
             void funcion1 (x : float, y : float)[
-                var a, b, c : int;
+                var a, b : int;
+                c, d : float;
                 {
                     a = x * 10;
                     b = y * 20;
