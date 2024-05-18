@@ -1,3 +1,12 @@
+#DFTV2-PN: Directorio de funciones y tablas de variables entrega 2 Puntos Neuralgicos
+#DFTV2-PN:  1: Creacion vareables 
+#DFTV2-PN:  2: Se agrega el nombre de la variable a la lista de variables actuales
+#DFTV2-PN:  3: Se asigna el tipo de variable a la variable current_type y se agregan las variables a la tabla de variables de la funcion actual y al terminar se eliminan la lista de variables actuales
+#DFTV2-PN:  4: Entrando a FUNCS se crea una nueva funcion en el directorio de funciones y se asigna a la variable current_function
+#DFTV2-PN:  5: Saliendo de FUNCS se limpia la variable current_function
+#DFTV2-PN:  6: print de prueba para mostrar el contenido del directorio de funciones y las variables de cada funcion
+
+
 # Generated from little_duck.g4 by ANTLR 4.13.0
 from antlr4 import *
 if "." in __name__:
@@ -11,35 +20,35 @@ from data_structures import Variable, VarTable, Function, FunctionDirectory
 # This class defines a complete listener for a parse tree produced by little_duckParser.
 class little_duckListener(ParseTreeListener):
     
+    #DFTV2-PN:  1
     def __init__(self):
         self.function_directory = FunctionDirectory()
         self.current_function = ""
         self.current_type = None
         self.current_var_arr = []
 
-    # Enter a parse tree produced by little_duckParser#start_.
 
+    #DFTV2-PN:  1
+    # Enter a parse tree produced by little_duckParser#start_.
     def enterStart_(self, ctx:little_duckParser.Start_Context):
         self.current_function = "global" 
         pass
 
+    #DFTV2-PN:  6
     # Exit a parse tree produced by little_duckParser#start_.
-    # print de prueba para mostrar el contenido del directorio de funciones y las variables de cada funcion
     def exitStart_(self, ctx:little_duckParser.Start_Context):
         self.function_directory.test_print()
         pass
 
+    #DFTV2-PN:  2
     # Exit a parse tree produced by little_duckParser#var1.
-    # Se agrega el nombre de la variable a la lista de variables actuales
     def exitVar1(self, ctx:little_duckParser.Var1Context):
         varname = ctx.ID().getText()
         self.current_var_arr.append(varname)
         pass
 
-
+    #DFTV2-PN:  3
     # Exit a parse tree produced by little_duckParser#type.
-    # Se asigna el tipo de variable a la variable current_type
-    # Se agregan las variables a la tabla de variables de la funcion actual y al terminar se eliminan la lista de variables actuales
     def exitType(self, ctx:little_duckParser.TypeContext):
         self.current_type = ctx.getText()   
         for varname in self.current_var_arr:
@@ -47,8 +56,8 @@ class little_duckListener(ParseTreeListener):
         self.current_var_arr = []
         pass
 
+    #DFTV2-PN:  4
     # Enter a parse tree produced by little_duckParser#funcs.
-    # Entrando a FUNCS se crea una nueva funcion en el directorio de funciones y se asigna a la variable current_function
     def enterFuncs(self, ctx:little_duckParser.FuncsContext):
         funcName = ctx.ID().getText()
         self.function_directory.add_function(funcName)
@@ -56,8 +65,8 @@ class little_duckListener(ParseTreeListener):
 
         pass
 
+    #DFTV2-PN:  5
     # Exit a parse tree produced by little_duckParser#funcs.
-    # Saliendo de FUNCS se limpia la variable current_function
     def exitFuncs(self, ctx:little_duckParser.FuncsContext):
         self.current_function = "global"
         pass
