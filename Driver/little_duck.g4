@@ -1,5 +1,34 @@
 grammar little_duck; 
 
+//Tokens 
+MAS: '+';
+MENOS: '-';
+POR : '*';
+DIV : '/';
+MENOR : '<';
+MAYOR : '>';
+DIF : '!=';
+IGUAL : '=';
+PARI : '(';
+PARD : ')';
+LLAVEI : '{';
+LLAVED : '}';
+COMA : ',';
+PUNTOYCOMA : ';' ;
+IF : 'if';
+ELSE : 'else';
+DO : 'do';
+WHILE : 'while';
+VAR : 'var';
+FLOAT : 'float';
+INT : 'int';
+PRINTF : 'printf';
+PROGRAM : 'program';
+END : 'end';
+VOID : 'void';
+MAIN : 'main';
+
+
 //reg ex 
    
     ID: [a-zA-Z][a-zA-Z_0-9]*;
@@ -12,25 +41,25 @@ grammar little_duck;
 
 
 //Programa 
-    start_: 'program' ID ';' (vars)? (funcs)* 'main' body 'end';
+    start_: PROGRAM ID PUNTOYCOMA (vars)? (funcs)* MAIN body END;
 //
 
 //vars 
-    vars: 'var' (var0)+;
+    vars: VAR (var0)+;
 
-    var0: var1 ':' type ';' var2;
+    var0: var1 ':' type PUNTOYCOMA var2;
 
-    var1: ID | var1 ',' ID;
+    var1: ID | var1 COMA ID;
 
     var2:  (var1)? ;
 //
 
 //type 
-    type: 'float' | 'int';
+    type: FLOAT | INT;
 //
 
 //Body 
-    body: '{' (statement)* '}'; 
+    body: LLAVEI (statement)* LLAVED; 
 //
 
 //statement 
@@ -38,27 +67,27 @@ grammar little_duck;
 //
 
 //assign 
-    assign: ID IGUAL expression ';';
+    assign: ID IGUAL expression PUNTOYCOMA;
 //
 
 //print 
 
-print: 'printf' '(' print0 ')' ';' ;
+print: PRINTF PARI print0 PARD PUNTOYCOMA ;
 
 print0: expression print1 |  CTE_STRING print1;
 
-print1:  (',' print0)?;  
+print1:  (COMA print0)?;  
 
 //
 
 //cycle 
-    cycle: 'do' body 'while' '(' expression ')' ';';
+    cycle: DO body WHILE PARI expression PARD PUNTOYCOMA;
 //
 
 //condition 
-    condition: 'if' '(' expression ')' body condition0;
+    condition: IF PARI expression PARD body condition0;
 
-    condition0: ('else' body ';')?; 
+    condition0: (ELSE body PUNTOYCOMA)?; 
 //
 
 //expression 
@@ -92,7 +121,7 @@ print1:  (',' print0)?;
 //
 
 //factor 
-    factor: '(' expression ')'
+    factor: PARI expression PARD
         | factor0 factor1;
 
     factor0: (MAS | MENOS )?;
@@ -101,54 +130,28 @@ print1:  (',' print0)?;
 //
 
 //Funcs 
-    funcs: 'void' ID '(' funcs0 ')' '[' funcs3 body ']' ';';
+    funcs: VOID ID PARI funcs0 PARD '[' funcs3 body ']' PUNTOYCOMA;
 
     funcs0: ( funcs1)?;
 
     funcs1: ID ':' type funcs2;
 
-    funcs2: (',' funcs1)?;
+    funcs2: (COMA funcs1)?;
 
     funcs3: (vars)?;
 //
 
 //f_call 
-    f_call: ID '(' f_call0 ')' ';';
+    f_call: ID PARI f_call0 PARD PUNTOYCOMA;
 
     f_call0:  (f_call1)?;
 
     f_call1: expression f_call2;
 
-    f_call2: (',' f_call1)?;
+    f_call2: (COMA f_call1)?;
 //
 
 
 
 
-MAS: '+';
-MENOS: '-';
-POR : '*';
-DIV : '/';
-MENOR : '<';
-MAYOR : '>';
-DIF : '!=';
-IGUAL : '=';
-PARI : '(';
-PARD : ')';
-LLAVEI : '{';
-LLAVED : '}';
-COMA : ',';
-PUNTOYCOMA : ';';
-IF : 'if';
-ELSE : 'else';
-DO : 'do';
-WHILE : 'while';
-VAR : 'var';
-FLOAT : 'float';
-INT : 'int';
-PRINTF : 'printf';
-PROGRAM : 'program';
-END : 'end';
-VOID : 'void';
-MAIN : 'main';
 

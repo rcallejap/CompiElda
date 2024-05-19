@@ -32,45 +32,45 @@ def serializedATN():
         1,31,3,31,247,8,31,1,32,3,32,250,8,32,1,33,1,33,1,33,1,33,1,33,1,
         33,1,34,3,34,259,8,34,1,35,1,35,1,35,1,36,1,36,3,36,266,8,36,1,36,
         0,1,6,37,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,
-        40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,0,5,1,0,8,9,1,
-        0,20,22,1,0,23,24,1,0,31,32,1,0,25,26,254,0,74,1,0,0,0,2,90,1,0,
-        0,0,4,96,1,0,0,0,6,102,1,0,0,0,8,114,1,0,0,0,10,116,1,0,0,0,12,118,
-        1,0,0,0,14,132,1,0,0,0,16,134,1,0,0,0,18,139,1,0,0,0,20,150,1,0,
-        0,0,22,154,1,0,0,0,24,156,1,0,0,0,26,164,1,0,0,0,28,175,1,0,0,0,
-        30,177,1,0,0,0,32,183,1,0,0,0,34,185,1,0,0,0,36,187,1,0,0,0,38,193,
+        40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,0,5,1,0,23,24,
+        1,0,8,10,1,0,4,5,1,0,31,32,1,0,6,7,254,0,74,1,0,0,0,2,90,1,0,0,0,
+        4,96,1,0,0,0,6,102,1,0,0,0,8,114,1,0,0,0,10,116,1,0,0,0,12,118,1,
+        0,0,0,14,132,1,0,0,0,16,134,1,0,0,0,18,139,1,0,0,0,20,150,1,0,0,
+        0,22,154,1,0,0,0,24,156,1,0,0,0,26,164,1,0,0,0,28,175,1,0,0,0,30,
+        177,1,0,0,0,32,183,1,0,0,0,34,185,1,0,0,0,36,187,1,0,0,0,38,193,
         1,0,0,0,40,195,1,0,0,0,42,197,1,0,0,0,44,199,1,0,0,0,46,205,1,0,
         0,0,48,207,1,0,0,0,50,216,1,0,0,0,52,219,1,0,0,0,54,223,1,0,0,0,
         56,225,1,0,0,0,58,237,1,0,0,0,60,239,1,0,0,0,62,246,1,0,0,0,64,249,
         1,0,0,0,66,251,1,0,0,0,68,258,1,0,0,0,70,260,1,0,0,0,72,265,1,0,
-        0,0,74,75,5,1,0,0,75,76,5,30,0,0,76,78,5,2,0,0,77,79,3,2,1,0,78,
+        0,0,74,75,5,26,0,0,75,76,5,30,0,0,76,78,5,17,0,0,77,79,3,2,1,0,78,
         77,1,0,0,0,78,79,1,0,0,0,79,83,1,0,0,0,80,82,3,56,28,0,81,80,1,0,
         0,0,82,85,1,0,0,0,83,81,1,0,0,0,83,84,1,0,0,0,84,86,1,0,0,0,85,83,
-        1,0,0,0,86,87,5,3,0,0,87,88,3,12,6,0,88,89,5,4,0,0,89,1,1,0,0,0,
-        90,92,5,5,0,0,91,93,3,4,2,0,92,91,1,0,0,0,93,94,1,0,0,0,94,92,1,
-        0,0,0,94,95,1,0,0,0,95,3,1,0,0,0,96,97,3,6,3,0,97,98,5,6,0,0,98,
-        99,3,10,5,0,99,100,5,2,0,0,100,101,3,8,4,0,101,5,1,0,0,0,102,103,
+        1,0,0,0,86,87,5,29,0,0,87,88,3,12,6,0,88,89,5,27,0,0,89,1,1,0,0,
+        0,90,92,5,22,0,0,91,93,3,4,2,0,92,91,1,0,0,0,93,94,1,0,0,0,94,92,
+        1,0,0,0,94,95,1,0,0,0,95,3,1,0,0,0,96,97,3,6,3,0,97,98,5,1,0,0,98,
+        99,3,10,5,0,99,100,5,17,0,0,100,101,3,8,4,0,101,5,1,0,0,0,102,103,
         6,3,-1,0,103,104,5,30,0,0,104,110,1,0,0,0,105,106,10,1,0,0,106,107,
-        5,7,0,0,107,109,5,30,0,0,108,105,1,0,0,0,109,112,1,0,0,0,110,108,
+        5,16,0,0,107,109,5,30,0,0,108,105,1,0,0,0,109,112,1,0,0,0,110,108,
         1,0,0,0,110,111,1,0,0,0,111,7,1,0,0,0,112,110,1,0,0,0,113,115,3,
         6,3,0,114,113,1,0,0,0,114,115,1,0,0,0,115,9,1,0,0,0,116,117,7,0,
-        0,0,117,11,1,0,0,0,118,122,5,10,0,0,119,121,3,14,7,0,120,119,1,0,
+        0,0,117,11,1,0,0,0,118,122,5,14,0,0,119,121,3,14,7,0,120,119,1,0,
         0,0,121,124,1,0,0,0,122,120,1,0,0,0,122,123,1,0,0,0,123,125,1,0,
-        0,0,124,122,1,0,0,0,125,126,5,11,0,0,126,13,1,0,0,0,127,133,3,16,
+        0,0,124,122,1,0,0,0,125,126,5,15,0,0,126,13,1,0,0,0,127,133,3,16,
         8,0,128,133,3,26,13,0,129,133,3,24,12,0,130,133,3,66,33,0,131,133,
         3,18,9,0,132,127,1,0,0,0,132,128,1,0,0,0,132,129,1,0,0,0,132,130,
         1,0,0,0,132,131,1,0,0,0,133,15,1,0,0,0,134,135,5,30,0,0,135,136,
-        5,12,0,0,136,137,3,30,15,0,137,138,5,2,0,0,138,17,1,0,0,0,139,140,
-        5,13,0,0,140,141,5,14,0,0,141,142,3,20,10,0,142,143,5,15,0,0,143,
-        144,5,2,0,0,144,19,1,0,0,0,145,146,3,30,15,0,146,147,3,22,11,0,147,
-        151,1,0,0,0,148,149,5,33,0,0,149,151,3,22,11,0,150,145,1,0,0,0,150,
-        148,1,0,0,0,151,21,1,0,0,0,152,153,5,7,0,0,153,155,3,20,10,0,154,
-        152,1,0,0,0,154,155,1,0,0,0,155,23,1,0,0,0,156,157,5,16,0,0,157,
-        158,3,12,6,0,158,159,5,17,0,0,159,160,5,14,0,0,160,161,3,30,15,0,
-        161,162,5,15,0,0,162,163,5,2,0,0,163,25,1,0,0,0,164,165,5,18,0,0,
-        165,166,5,14,0,0,166,167,3,30,15,0,167,168,5,15,0,0,168,169,3,12,
-        6,0,169,170,3,28,14,0,170,27,1,0,0,0,171,172,5,19,0,0,172,173,3,
-        12,6,0,173,174,5,2,0,0,174,176,1,0,0,0,175,171,1,0,0,0,175,176,1,
-        0,0,0,176,29,1,0,0,0,177,178,3,36,18,0,178,179,3,32,16,0,179,31,
+        5,11,0,0,136,137,3,30,15,0,137,138,5,17,0,0,138,17,1,0,0,0,139,140,
+        5,25,0,0,140,141,5,12,0,0,141,142,3,20,10,0,142,143,5,13,0,0,143,
+        144,5,17,0,0,144,19,1,0,0,0,145,146,3,30,15,0,146,147,3,22,11,0,
+        147,151,1,0,0,0,148,149,5,33,0,0,149,151,3,22,11,0,150,145,1,0,0,
+        0,150,148,1,0,0,0,151,21,1,0,0,0,152,153,5,16,0,0,153,155,3,20,10,
+        0,154,152,1,0,0,0,154,155,1,0,0,0,155,23,1,0,0,0,156,157,5,20,0,
+        0,157,158,3,12,6,0,158,159,5,21,0,0,159,160,5,12,0,0,160,161,3,30,
+        15,0,161,162,5,13,0,0,162,163,5,17,0,0,163,25,1,0,0,0,164,165,5,
+        18,0,0,165,166,5,12,0,0,166,167,3,30,15,0,167,168,5,13,0,0,168,169,
+        3,12,6,0,169,170,3,28,14,0,170,27,1,0,0,0,171,172,5,19,0,0,172,173,
+        3,12,6,0,173,174,5,17,0,0,174,176,1,0,0,0,175,171,1,0,0,0,175,176,
+        1,0,0,0,176,29,1,0,0,0,177,178,3,36,18,0,178,179,3,32,16,0,179,31,
         1,0,0,0,180,181,3,34,17,0,181,182,3,36,18,0,182,184,1,0,0,0,183,
         180,1,0,0,0,183,184,1,0,0,0,184,33,1,0,0,0,185,186,7,1,0,0,186,35,
         1,0,0,0,187,188,3,44,22,0,188,189,3,38,19,0,189,37,1,0,0,0,190,191,
@@ -79,25 +79,25 @@ def serializedATN():
         7,3,0,0,198,43,1,0,0,0,199,200,3,50,25,0,200,201,3,46,23,0,201,45,
         1,0,0,0,202,203,3,48,24,0,203,204,3,44,22,0,204,206,1,0,0,0,205,
         202,1,0,0,0,205,206,1,0,0,0,206,47,1,0,0,0,207,208,7,4,0,0,208,49,
-        1,0,0,0,209,210,5,14,0,0,210,211,3,30,15,0,211,212,5,15,0,0,212,
+        1,0,0,0,209,210,5,12,0,0,210,211,3,30,15,0,211,212,5,13,0,0,212,
         217,1,0,0,0,213,214,3,52,26,0,214,215,3,54,27,0,215,217,1,0,0,0,
         216,209,1,0,0,0,216,213,1,0,0,0,217,51,1,0,0,0,218,220,7,2,0,0,219,
         218,1,0,0,0,219,220,1,0,0,0,220,53,1,0,0,0,221,224,5,30,0,0,222,
         224,3,42,21,0,223,221,1,0,0,0,223,222,1,0,0,0,224,55,1,0,0,0,225,
-        226,5,27,0,0,226,227,5,30,0,0,227,228,5,14,0,0,228,229,3,58,29,0,
-        229,230,5,15,0,0,230,231,5,28,0,0,231,232,3,64,32,0,232,233,3,12,
-        6,0,233,234,5,29,0,0,234,235,5,2,0,0,235,57,1,0,0,0,236,238,3,60,
+        226,5,28,0,0,226,227,5,30,0,0,227,228,5,12,0,0,228,229,3,58,29,0,
+        229,230,5,13,0,0,230,231,5,2,0,0,231,232,3,64,32,0,232,233,3,12,
+        6,0,233,234,5,3,0,0,234,235,5,17,0,0,235,57,1,0,0,0,236,238,3,60,
         30,0,237,236,1,0,0,0,237,238,1,0,0,0,238,59,1,0,0,0,239,240,5,30,
-        0,0,240,241,5,6,0,0,241,242,3,10,5,0,242,243,3,62,31,0,243,61,1,
-        0,0,0,244,245,5,7,0,0,245,247,3,60,30,0,246,244,1,0,0,0,246,247,
+        0,0,240,241,5,1,0,0,241,242,3,10,5,0,242,243,3,62,31,0,243,61,1,
+        0,0,0,244,245,5,16,0,0,245,247,3,60,30,0,246,244,1,0,0,0,246,247,
         1,0,0,0,247,63,1,0,0,0,248,250,3,2,1,0,249,248,1,0,0,0,249,250,1,
-        0,0,0,250,65,1,0,0,0,251,252,5,30,0,0,252,253,5,14,0,0,253,254,3,
-        68,34,0,254,255,5,15,0,0,255,256,5,2,0,0,256,67,1,0,0,0,257,259,
+        0,0,0,250,65,1,0,0,0,251,252,5,30,0,0,252,253,5,12,0,0,253,254,3,
+        68,34,0,254,255,5,13,0,0,255,256,5,17,0,0,256,67,1,0,0,0,257,259,
         3,70,35,0,258,257,1,0,0,0,258,259,1,0,0,0,259,69,1,0,0,0,260,261,
-        3,30,15,0,261,262,3,72,36,0,262,71,1,0,0,0,263,264,5,7,0,0,264,266,
-        3,70,35,0,265,263,1,0,0,0,265,266,1,0,0,0,266,73,1,0,0,0,21,78,83,
-        94,110,114,122,132,150,154,175,183,193,205,216,219,223,237,246,249,
-        258,265
+        3,30,15,0,261,262,3,72,36,0,262,71,1,0,0,0,263,264,5,16,0,0,264,
+        266,3,70,35,0,265,263,1,0,0,0,265,266,1,0,0,0,266,73,1,0,0,0,21,
+        78,83,94,110,114,122,132,150,154,175,183,193,205,216,219,223,237,
+        246,249,258,265
     ]
 
 class little_duckParser ( Parser ):
@@ -110,21 +110,19 @@ class little_duckParser ( Parser ):
 
     sharedContextCache = PredictionContextCache()
 
-    literalNames = [ "<INVALID>", "'program'", "';'", "'main'", "'end'", 
-                     "'var'", "':'", "','", "'float'", "'int'", "'{'", "'}'", 
-                     "'='", "'printf'", "'('", "')'", "'do'", "'while'", 
-                     "'if'", "'else'", "'>'", "'<'", "'!='", "'-'", "'+'", 
-                     "'*'", "'/'", "'void'", "'['", "']'" ]
+    literalNames = [ "<INVALID>", "':'", "'['", "']'", "'+'", "'-'", "'*'", 
+                     "'/'", "'<'", "'>'", "'!='", "'='", "'('", "')'", "'{'", 
+                     "'}'", "','", "';'", "'if'", "'else'", "'do'", "'while'", 
+                     "'var'", "'float'", "'int'", "'printf'", "'program'", 
+                     "'end'", "'void'", "'main'" ]
 
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "<INVALID>", "<INVALID>", "ID", "CTE_FLOAT", "CTE_INT", 
-                      "CTE_STRING", "WS" ]
+                      "MAS", "MENOS", "POR", "DIV", "MENOR", "MAYOR", "DIF", 
+                      "IGUAL", "PARI", "PARD", "LLAVEI", "LLAVED", "COMA", 
+                      "PUNTOYCOMA", "IF", "ELSE", "DO", "WHILE", "VAR", 
+                      "FLOAT", "INT", "PRINTF", "PROGRAM", "END", "VOID", 
+                      "MAIN", "ID", "CTE_FLOAT", "CTE_INT", "CTE_STRING", 
+                      "WS" ]
 
     RULE_start_ = 0
     RULE_vars = 1
@@ -176,32 +174,32 @@ class little_duckParser ( Parser ):
     T__0=1
     T__1=2
     T__2=3
-    T__3=4
-    T__4=5
-    T__5=6
-    T__6=7
-    T__7=8
-    T__8=9
-    T__9=10
-    T__10=11
-    T__11=12
-    T__12=13
-    T__13=14
-    T__14=15
-    T__15=16
-    T__16=17
-    T__17=18
-    T__18=19
-    T__19=20
-    T__20=21
-    T__21=22
-    T__22=23
-    T__23=24
-    T__24=25
-    T__25=26
-    T__26=27
-    T__27=28
-    T__28=29
+    MAS=4
+    MENOS=5
+    POR=6
+    DIV=7
+    MENOR=8
+    MAYOR=9
+    DIF=10
+    IGUAL=11
+    PARI=12
+    PARD=13
+    LLAVEI=14
+    LLAVED=15
+    COMA=16
+    PUNTOYCOMA=17
+    IF=18
+    ELSE=19
+    DO=20
+    WHILE=21
+    VAR=22
+    FLOAT=23
+    INT=24
+    PRINTF=25
+    PROGRAM=26
+    END=27
+    VOID=28
+    MAIN=29
     ID=30
     CTE_FLOAT=31
     CTE_INT=32
@@ -224,12 +222,24 @@ class little_duckParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def PROGRAM(self):
+            return self.getToken(little_duckParser.PROGRAM, 0)
+
         def ID(self):
             return self.getToken(little_duckParser.ID, 0)
+
+        def PUNTOYCOMA(self):
+            return self.getToken(little_duckParser.PUNTOYCOMA, 0)
+
+        def MAIN(self):
+            return self.getToken(little_duckParser.MAIN, 0)
 
         def body(self):
             return self.getTypedRuleContext(little_duckParser.BodyContext,0)
 
+
+        def END(self):
+            return self.getToken(little_duckParser.END, 0)
 
         def vars_(self):
             return self.getTypedRuleContext(little_duckParser.VarsContext,0)
@@ -270,15 +280,15 @@ class little_duckParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 74
-            self.match(little_duckParser.T__0)
+            self.match(little_duckParser.PROGRAM)
             self.state = 75
             self.match(little_duckParser.ID)
             self.state = 76
-            self.match(little_duckParser.T__1)
+            self.match(little_duckParser.PUNTOYCOMA)
             self.state = 78
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==5:
+            if _la==22:
                 self.state = 77
                 self.vars_()
 
@@ -286,7 +296,7 @@ class little_duckParser ( Parser ):
             self.state = 83
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==27:
+            while _la==28:
                 self.state = 80
                 self.funcs()
                 self.state = 85
@@ -294,11 +304,11 @@ class little_duckParser ( Parser ):
                 _la = self._input.LA(1)
 
             self.state = 86
-            self.match(little_duckParser.T__2)
+            self.match(little_duckParser.MAIN)
             self.state = 87
             self.body()
             self.state = 88
-            self.match(little_duckParser.T__3)
+            self.match(little_duckParser.END)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -314,6 +324,9 @@ class little_duckParser ( Parser ):
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def VAR(self):
+            return self.getToken(little_duckParser.VAR, 0)
 
         def var0(self, i:int=None):
             if i is None:
@@ -350,7 +363,7 @@ class little_duckParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 90
-            self.match(little_duckParser.T__4)
+            self.match(little_duckParser.VAR)
             self.state = 92 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
@@ -387,6 +400,9 @@ class little_duckParser ( Parser ):
             return self.getTypedRuleContext(little_duckParser.TypeContext,0)
 
 
+        def PUNTOYCOMA(self):
+            return self.getToken(little_duckParser.PUNTOYCOMA, 0)
+
         def var2(self):
             return self.getTypedRuleContext(little_duckParser.Var2Context,0)
 
@@ -420,11 +436,11 @@ class little_duckParser ( Parser ):
             self.state = 96
             self.var1(0)
             self.state = 97
-            self.match(little_duckParser.T__5)
+            self.match(little_duckParser.T__0)
             self.state = 98
             self.type_()
             self.state = 99
-            self.match(little_duckParser.T__1)
+            self.match(little_duckParser.PUNTOYCOMA)
             self.state = 100
             self.var2()
         except RecognitionException as re:
@@ -449,6 +465,9 @@ class little_duckParser ( Parser ):
         def var1(self):
             return self.getTypedRuleContext(little_duckParser.Var1Context,0)
 
+
+        def COMA(self):
+            return self.getToken(little_duckParser.COMA, 0)
 
         def getRuleIndex(self):
             return little_duckParser.RULE_var1
@@ -496,7 +515,7 @@ class little_duckParser ( Parser ):
                         from antlr4.error.Errors import FailedPredicateException
                         raise FailedPredicateException(self, "self.precpred(self._ctx, 1)")
                     self.state = 106
-                    self.match(little_duckParser.T__6)
+                    self.match(little_duckParser.COMA)
                     self.state = 107
                     self.match(little_duckParser.ID) 
                 self.state = 112
@@ -573,6 +592,11 @@ class little_duckParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def FLOAT(self):
+            return self.getToken(little_duckParser.FLOAT, 0)
+
+        def INT(self):
+            return self.getToken(little_duckParser.INT, 0)
 
         def getRuleIndex(self):
             return little_duckParser.RULE_type
@@ -603,7 +627,7 @@ class little_duckParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 116
             _la = self._input.LA(1)
-            if not(_la==8 or _la==9):
+            if not(_la==23 or _la==24):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -623,6 +647,12 @@ class little_duckParser ( Parser ):
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def LLAVEI(self):
+            return self.getToken(little_duckParser.LLAVEI, 0)
+
+        def LLAVED(self):
+            return self.getToken(little_duckParser.LLAVED, 0)
 
         def statement(self, i:int=None):
             if i is None:
@@ -659,11 +689,11 @@ class little_duckParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 118
-            self.match(little_duckParser.T__9)
+            self.match(little_duckParser.LLAVEI)
             self.state = 122
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 1074077696) != 0):
+            while (((_la) & ~0x3f) == 0 and ((1 << _la) & 1108606976) != 0):
                 self.state = 119
                 self.statement()
                 self.state = 124
@@ -671,7 +701,7 @@ class little_duckParser ( Parser ):
                 _la = self._input.LA(1)
 
             self.state = 125
-            self.match(little_duckParser.T__10)
+            self.match(little_duckParser.LLAVED)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -786,9 +816,15 @@ class little_duckParser ( Parser ):
         def ID(self):
             return self.getToken(little_duckParser.ID, 0)
 
+        def IGUAL(self):
+            return self.getToken(little_duckParser.IGUAL, 0)
+
         def expression(self):
             return self.getTypedRuleContext(little_duckParser.ExpressionContext,0)
 
+
+        def PUNTOYCOMA(self):
+            return self.getToken(little_duckParser.PUNTOYCOMA, 0)
 
         def getRuleIndex(self):
             return little_duckParser.RULE_assign
@@ -819,11 +855,11 @@ class little_duckParser ( Parser ):
             self.state = 134
             self.match(little_duckParser.ID)
             self.state = 135
-            self.match(little_duckParser.T__11)
+            self.match(little_duckParser.IGUAL)
             self.state = 136
             self.expression()
             self.state = 137
-            self.match(little_duckParser.T__1)
+            self.match(little_duckParser.PUNTOYCOMA)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -840,9 +876,21 @@ class little_duckParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def PRINTF(self):
+            return self.getToken(little_duckParser.PRINTF, 0)
+
+        def PARI(self):
+            return self.getToken(little_duckParser.PARI, 0)
+
         def print0(self):
             return self.getTypedRuleContext(little_duckParser.Print0Context,0)
 
+
+        def PARD(self):
+            return self.getToken(little_duckParser.PARD, 0)
+
+        def PUNTOYCOMA(self):
+            return self.getToken(little_duckParser.PUNTOYCOMA, 0)
 
         def getRuleIndex(self):
             return little_duckParser.RULE_print
@@ -871,15 +919,15 @@ class little_duckParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 139
-            self.match(little_duckParser.T__12)
+            self.match(little_duckParser.PRINTF)
             self.state = 140
-            self.match(little_duckParser.T__13)
+            self.match(little_duckParser.PARI)
             self.state = 141
             self.print0()
             self.state = 142
-            self.match(little_duckParser.T__14)
+            self.match(little_duckParser.PARD)
             self.state = 143
-            self.match(little_duckParser.T__1)
+            self.match(little_duckParser.PUNTOYCOMA)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -935,7 +983,7 @@ class little_duckParser ( Parser ):
             self.state = 150
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [14, 23, 24, 30, 31, 32]:
+            if token in [4, 5, 12, 30, 31, 32]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 145
                 self.expression()
@@ -967,6 +1015,9 @@ class little_duckParser ( Parser ):
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def COMA(self):
+            return self.getToken(little_duckParser.COMA, 0)
 
         def print0(self):
             return self.getTypedRuleContext(little_duckParser.Print0Context,0)
@@ -1002,9 +1053,9 @@ class little_duckParser ( Parser ):
             self.state = 154
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==7:
+            if _la==16:
                 self.state = 152
-                self.match(little_duckParser.T__6)
+                self.match(little_duckParser.COMA)
                 self.state = 153
                 self.print0()
 
@@ -1025,13 +1076,28 @@ class little_duckParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def DO(self):
+            return self.getToken(little_duckParser.DO, 0)
+
         def body(self):
             return self.getTypedRuleContext(little_duckParser.BodyContext,0)
 
 
+        def WHILE(self):
+            return self.getToken(little_duckParser.WHILE, 0)
+
+        def PARI(self):
+            return self.getToken(little_duckParser.PARI, 0)
+
         def expression(self):
             return self.getTypedRuleContext(little_duckParser.ExpressionContext,0)
 
+
+        def PARD(self):
+            return self.getToken(little_duckParser.PARD, 0)
+
+        def PUNTOYCOMA(self):
+            return self.getToken(little_duckParser.PUNTOYCOMA, 0)
 
         def getRuleIndex(self):
             return little_duckParser.RULE_cycle
@@ -1060,19 +1126,19 @@ class little_duckParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 156
-            self.match(little_duckParser.T__15)
+            self.match(little_duckParser.DO)
             self.state = 157
             self.body()
             self.state = 158
-            self.match(little_duckParser.T__16)
+            self.match(little_duckParser.WHILE)
             self.state = 159
-            self.match(little_duckParser.T__13)
+            self.match(little_duckParser.PARI)
             self.state = 160
             self.expression()
             self.state = 161
-            self.match(little_duckParser.T__14)
+            self.match(little_duckParser.PARD)
             self.state = 162
-            self.match(little_duckParser.T__1)
+            self.match(little_duckParser.PUNTOYCOMA)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -1089,9 +1155,18 @@ class little_duckParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def IF(self):
+            return self.getToken(little_duckParser.IF, 0)
+
+        def PARI(self):
+            return self.getToken(little_duckParser.PARI, 0)
+
         def expression(self):
             return self.getTypedRuleContext(little_duckParser.ExpressionContext,0)
 
+
+        def PARD(self):
+            return self.getToken(little_duckParser.PARD, 0)
 
         def body(self):
             return self.getTypedRuleContext(little_duckParser.BodyContext,0)
@@ -1128,13 +1203,13 @@ class little_duckParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 164
-            self.match(little_duckParser.T__17)
+            self.match(little_duckParser.IF)
             self.state = 165
-            self.match(little_duckParser.T__13)
+            self.match(little_duckParser.PARI)
             self.state = 166
             self.expression()
             self.state = 167
-            self.match(little_duckParser.T__14)
+            self.match(little_duckParser.PARD)
             self.state = 168
             self.body()
             self.state = 169
@@ -1155,9 +1230,15 @@ class little_duckParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def ELSE(self):
+            return self.getToken(little_duckParser.ELSE, 0)
+
         def body(self):
             return self.getTypedRuleContext(little_duckParser.BodyContext,0)
 
+
+        def PUNTOYCOMA(self):
+            return self.getToken(little_duckParser.PUNTOYCOMA, 0)
 
         def getRuleIndex(self):
             return little_duckParser.RULE_condition0
@@ -1191,11 +1272,11 @@ class little_duckParser ( Parser ):
             _la = self._input.LA(1)
             if _la==19:
                 self.state = 171
-                self.match(little_duckParser.T__18)
+                self.match(little_duckParser.ELSE)
                 self.state = 172
                 self.body()
                 self.state = 173
-                self.match(little_duckParser.T__1)
+                self.match(little_duckParser.PUNTOYCOMA)
 
 
         except RecognitionException as re:
@@ -1306,7 +1387,7 @@ class little_duckParser ( Parser ):
             self.state = 183
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & 7340032) != 0):
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & 1792) != 0):
                 self.state = 180
                 self.expression1()
                 self.state = 181
@@ -1329,6 +1410,14 @@ class little_duckParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def MAYOR(self):
+            return self.getToken(little_duckParser.MAYOR, 0)
+
+        def MENOR(self):
+            return self.getToken(little_duckParser.MENOR, 0)
+
+        def DIF(self):
+            return self.getToken(little_duckParser.DIF, 0)
 
         def getRuleIndex(self):
             return little_duckParser.RULE_expression1
@@ -1359,7 +1448,7 @@ class little_duckParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 185
             _la = self._input.LA(1)
-            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 7340032) != 0)):
+            if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 1792) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -1472,7 +1561,7 @@ class little_duckParser ( Parser ):
             self.state = 193
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==23 or _la==24:
+            if _la==4 or _la==5:
                 self.state = 190
                 self.exp1()
                 self.state = 191
@@ -1495,6 +1584,11 @@ class little_duckParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def MENOS(self):
+            return self.getToken(little_duckParser.MENOS, 0)
+
+        def MAS(self):
+            return self.getToken(little_duckParser.MAS, 0)
 
         def getRuleIndex(self):
             return little_duckParser.RULE_exp1
@@ -1525,7 +1619,7 @@ class little_duckParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 195
             _la = self._input.LA(1)
-            if not(_la==23 or _la==24):
+            if not(_la==4 or _la==5):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -1694,7 +1788,7 @@ class little_duckParser ( Parser ):
             self.state = 205
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==25 or _la==26:
+            if _la==6 or _la==7:
                 self.state = 202
                 self.termino1()
                 self.state = 203
@@ -1717,6 +1811,11 @@ class little_duckParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def POR(self):
+            return self.getToken(little_duckParser.POR, 0)
+
+        def DIV(self):
+            return self.getToken(little_duckParser.DIV, 0)
 
         def getRuleIndex(self):
             return little_duckParser.RULE_termino1
@@ -1747,7 +1846,7 @@ class little_duckParser ( Parser ):
             self.enterOuterAlt(localctx, 1)
             self.state = 207
             _la = self._input.LA(1)
-            if not(_la==25 or _la==26):
+            if not(_la==6 or _la==7):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
@@ -1768,9 +1867,15 @@ class little_duckParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def PARI(self):
+            return self.getToken(little_duckParser.PARI, 0)
+
         def expression(self):
             return self.getTypedRuleContext(little_duckParser.ExpressionContext,0)
 
+
+        def PARD(self):
+            return self.getToken(little_duckParser.PARD, 0)
 
         def factor0(self):
             return self.getTypedRuleContext(little_duckParser.Factor0Context,0)
@@ -1808,16 +1913,16 @@ class little_duckParser ( Parser ):
             self.state = 216
             self._errHandler.sync(self)
             token = self._input.LA(1)
-            if token in [14]:
+            if token in [12]:
                 self.enterOuterAlt(localctx, 1)
                 self.state = 209
-                self.match(little_duckParser.T__13)
+                self.match(little_duckParser.PARI)
                 self.state = 210
                 self.expression()
                 self.state = 211
-                self.match(little_duckParser.T__14)
+                self.match(little_duckParser.PARD)
                 pass
-            elif token in [23, 24, 30, 31, 32]:
+            elif token in [4, 5, 30, 31, 32]:
                 self.enterOuterAlt(localctx, 2)
                 self.state = 213
                 self.factor0()
@@ -1843,6 +1948,11 @@ class little_duckParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def MAS(self):
+            return self.getToken(little_duckParser.MAS, 0)
+
+        def MENOS(self):
+            return self.getToken(little_duckParser.MENOS, 0)
 
         def getRuleIndex(self):
             return little_duckParser.RULE_factor0
@@ -1874,10 +1984,10 @@ class little_duckParser ( Parser ):
             self.state = 219
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==23 or _la==24:
+            if _la==4 or _la==5:
                 self.state = 218
                 _la = self._input.LA(1)
-                if not(_la==23 or _la==24):
+                if not(_la==4 or _la==5):
                     self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
@@ -1964,12 +2074,21 @@ class little_duckParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def VOID(self):
+            return self.getToken(little_duckParser.VOID, 0)
+
         def ID(self):
             return self.getToken(little_duckParser.ID, 0)
+
+        def PARI(self):
+            return self.getToken(little_duckParser.PARI, 0)
 
         def funcs0(self):
             return self.getTypedRuleContext(little_duckParser.Funcs0Context,0)
 
+
+        def PARD(self):
+            return self.getToken(little_duckParser.PARD, 0)
 
         def funcs3(self):
             return self.getTypedRuleContext(little_duckParser.Funcs3Context,0)
@@ -1978,6 +2097,9 @@ class little_duckParser ( Parser ):
         def body(self):
             return self.getTypedRuleContext(little_duckParser.BodyContext,0)
 
+
+        def PUNTOYCOMA(self):
+            return self.getToken(little_duckParser.PUNTOYCOMA, 0)
 
         def getRuleIndex(self):
             return little_duckParser.RULE_funcs
@@ -2006,25 +2128,25 @@ class little_duckParser ( Parser ):
         try:
             self.enterOuterAlt(localctx, 1)
             self.state = 225
-            self.match(little_duckParser.T__26)
+            self.match(little_duckParser.VOID)
             self.state = 226
             self.match(little_duckParser.ID)
             self.state = 227
-            self.match(little_duckParser.T__13)
+            self.match(little_duckParser.PARI)
             self.state = 228
             self.funcs0()
             self.state = 229
-            self.match(little_duckParser.T__14)
+            self.match(little_duckParser.PARD)
             self.state = 230
-            self.match(little_duckParser.T__27)
+            self.match(little_duckParser.T__1)
             self.state = 231
             self.funcs3()
             self.state = 232
             self.body()
             self.state = 233
-            self.match(little_duckParser.T__28)
+            self.match(little_duckParser.T__2)
             self.state = 234
-            self.match(little_duckParser.T__1)
+            self.match(little_duckParser.PUNTOYCOMA)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -2136,7 +2258,7 @@ class little_duckParser ( Parser ):
             self.state = 239
             self.match(little_duckParser.ID)
             self.state = 240
-            self.match(little_duckParser.T__5)
+            self.match(little_duckParser.T__0)
             self.state = 241
             self.type_()
             self.state = 242
@@ -2156,6 +2278,9 @@ class little_duckParser ( Parser ):
         def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
             super().__init__(parent, invokingState)
             self.parser = parser
+
+        def COMA(self):
+            return self.getToken(little_duckParser.COMA, 0)
 
         def funcs1(self):
             return self.getTypedRuleContext(little_duckParser.Funcs1Context,0)
@@ -2191,9 +2316,9 @@ class little_duckParser ( Parser ):
             self.state = 246
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==7:
+            if _la==16:
                 self.state = 244
-                self.match(little_duckParser.T__6)
+                self.match(little_duckParser.COMA)
                 self.state = 245
                 self.funcs1()
 
@@ -2248,7 +2373,7 @@ class little_duckParser ( Parser ):
             self.state = 249
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==5:
+            if _la==22:
                 self.state = 248
                 self.vars_()
 
@@ -2272,9 +2397,18 @@ class little_duckParser ( Parser ):
         def ID(self):
             return self.getToken(little_duckParser.ID, 0)
 
+        def PARI(self):
+            return self.getToken(little_duckParser.PARI, 0)
+
         def f_call0(self):
             return self.getTypedRuleContext(little_duckParser.F_call0Context,0)
 
+
+        def PARD(self):
+            return self.getToken(little_duckParser.PARD, 0)
+
+        def PUNTOYCOMA(self):
+            return self.getToken(little_duckParser.PUNTOYCOMA, 0)
 
         def getRuleIndex(self):
             return little_duckParser.RULE_f_call
@@ -2305,13 +2439,13 @@ class little_duckParser ( Parser ):
             self.state = 251
             self.match(little_duckParser.ID)
             self.state = 252
-            self.match(little_duckParser.T__13)
+            self.match(little_duckParser.PARI)
             self.state = 253
             self.f_call0()
             self.state = 254
-            self.match(little_duckParser.T__14)
+            self.match(little_duckParser.PARD)
             self.state = 255
-            self.match(little_duckParser.T__1)
+            self.match(little_duckParser.PUNTOYCOMA)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -2362,7 +2496,7 @@ class little_duckParser ( Parser ):
             self.state = 258
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if (((_la) & ~0x3f) == 0 and ((1 << _la) & 7541374976) != 0):
+            if (((_la) & ~0x3f) == 0 and ((1 << _la) & 7516196912) != 0):
                 self.state = 257
                 self.f_call1()
 
@@ -2437,6 +2571,9 @@ class little_duckParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
+        def COMA(self):
+            return self.getToken(little_duckParser.COMA, 0)
+
         def f_call1(self):
             return self.getTypedRuleContext(little_duckParser.F_call1Context,0)
 
@@ -2471,9 +2608,9 @@ class little_duckParser ( Parser ):
             self.state = 265
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            if _la==7:
+            if _la==16:
                 self.state = 263
-                self.match(little_duckParser.T__6)
+                self.match(little_duckParser.COMA)
                 self.state = 264
                 self.f_call1()
 

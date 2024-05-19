@@ -82,11 +82,6 @@ class little_duckVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by little_duckParser#factor0.
     def visitFactor0(self, ctx:little_duckParser.Factor0Context):
-        print (ctx.getText())
-        if ctx.getText() == '+': 
-            self.operator_stack.append(ctx.getText())
-        elif ctx.getText() == '-':
-            self.operator_stack.append(ctx.getText())
 
         return self.visitChildren(ctx)
 
