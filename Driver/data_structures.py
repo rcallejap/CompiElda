@@ -1,3 +1,12 @@
+
+class Cuadroplos:
+    def __init__ (self, op, left, right, result):
+        self.op = op
+        self.left = left
+        self.right = right
+        self.result = result
+    
+
 class Variable:
     def __init__(self, name, vtype, value=None):
         self.name = name 
@@ -17,8 +26,6 @@ class Function:
     def __init__(self,name ):
         self.name = name
         self.var_table = VarTable() #tabla de variables de la funcion
-
-
 
 
 class FunctionDirectory:

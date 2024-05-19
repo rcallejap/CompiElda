@@ -37,7 +37,7 @@ class little_duckListener(ParseTreeListener):
     #DFTV2-PN:  6
     # Exit a parse tree produced by little_duckParser#start_.
     def exitStart_(self, ctx:little_duckParser.Start_Context):
-        self.function_directory.test_print()
+        #self.function_directory.test_print()
         pass
 
     #DFTV2-PN:  2

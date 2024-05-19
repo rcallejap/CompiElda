@@ -38,7 +38,7 @@ grammar little_duck;
 //
 
 //assign 
-    assign: ID '=' expression ';';
+    assign: ID IGUAL expression ';';
 //
 
 //print 
@@ -66,7 +66,7 @@ print1:  (',' print0)?;
 
     expression0:  (expression1 exp)?;
 
-    expression1: '>' | '<' | '!=';
+    expression1: MAYOR | MENOR | DIF;
 //
 
 //exp 
@@ -74,7 +74,7 @@ print1:  (',' print0)?;
 
     exp0:  (exp1 exp)?;
 
-    exp1: '-' | '+';
+    exp1: MENOS | MAS;
 //
 
 
@@ -88,14 +88,14 @@ print1:  (',' print0)?;
 
     termino0: ( termino1 termino)?;
 
-    termino1: '*' | '/';
+    termino1: POR | DIV;
 //
 
 //factor 
     factor: '(' expression ')'
         | factor0 factor1;
 
-    factor0: ('+' | '-' )?;
+    factor0: (MAS | MENOS )?;
 
     factor1: ID | cte;
 //
@@ -124,4 +124,31 @@ print1:  (',' print0)?;
 
 
 
+
+MAS: '+';
+MENOS: '-';
+POR : '*';
+DIV : '/';
+MENOR : '<';
+MAYOR : '>';
+DIF : '!=';
+IGUAL : '=';
+PARI : '(';
+PARD : ')';
+LLAVEI : '{';
+LLAVED : '}';
+COMA : ',';
+PUNTOYCOMA : ';';
+IF : 'if';
+ELSE : 'else';
+DO : 'do';
+WHILE : 'while';
+VAR : 'var';
+FLOAT : 'float';
+INT : 'int';
+PRINTF : 'printf';
+PROGRAM : 'program';
+END : 'end';
+VOID : 'void';
+MAIN : 'main';
 
