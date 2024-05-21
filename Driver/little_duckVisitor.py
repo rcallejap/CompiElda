@@ -213,13 +213,6 @@ class little_duckVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by little_duckParser#cycle.
     def visitCycle(self, ctx:little_duckParser.CycleContext):
-
- 
-        
-
-
-        
-
         return self.visitChildren(ctx)
 
 
@@ -327,6 +320,13 @@ class little_duckVisitor(ParseTreeVisitor):
 
 
 del little_duckParser
+
+def pop_and_add(self):
+    operator = self.operator_stack.pop()
+    right_operand = self.operand_stack.pop()
+    left_operand = self.operand_stack.pop()
+    add_cuad(self, operator, left_operand, right_operand)
+
 
 # Metodo para agregar cuadruplos
 def check_and_pop(self, operator):
