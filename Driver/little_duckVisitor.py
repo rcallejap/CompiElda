@@ -5,10 +5,11 @@ if "." in __name__:
 else:
     from little_duckParser import little_duckParser
 
-from data_structures import Variable, VarTable, Function, FunctionDirectory, Cuadroplos
+from data_structures import Variable, VarTable, Function, FunctionDirectory, Cuadroplo
 from cubo_semantico import check_cubo_semantico
 
 # This class defines a complete generic visitor for a parse tree produced by little_duckParser.
+
 
 class little_duckVisitor(ParseTreeVisitor):
 
@@ -55,6 +56,12 @@ class little_duckVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by little_duckParser#exp1.
     def visitExp1(self, ctx:little_duckParser.Exp1Context):
+        if ctx.MAS():
+            check_and_pop(self, '+')
+            self.operator_stack.append(ctx.MAS().getText())
+        elif ctx.MENOS():
+            check_and_pop(self, '-')
+            self.operator_stack.append(ctx.MENOS().getText())
         return self.visitChildren(ctx)
 
 
@@ -71,6 +78,12 @@ class little_duckVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by little_duckParser#termino1.
     def visitTermino1(self, ctx:little_duckParser.Termino1Context):
+        if ctx.POR():
+            check_and_pop(self, '*')
+            self.operator_stack.append(ctx.POR().getText())
+        elif ctx.DIV():
+            check_and_pop(self, '/')
+            self.operator_stack.append(ctx.DIV().getText())
         return self.visitChildren(ctx)
 
 
@@ -82,7 +95,12 @@ class little_duckVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by little_duckParser#factor0.
     def visitFactor0(self, ctx:little_duckParser.Factor0Context):
-
+        if ctx.MAS():
+            check_and_pop(self, '+')
+            self.operator_stack.append(ctx.MAS().getText())
+        elif ctx.MENOS():
+            check_and_pop(self, '-')
+            self.operator_stack.append(ctx.MENOS().getText())
         return self.visitChildren(ctx)
 
 
@@ -90,13 +108,13 @@ class little_duckVisitor(ParseTreeVisitor):
     def visitFactor1(self, ctx:little_duckParser.Factor1Context):
         if ctx.ID():
             if self.current_function == 'global':
-                value = self.function_directory.global_var_table.variables[ctx.ID().getText()].value
+                name = self.function_directory.global_var_table.variables[ctx.ID().getText()].name
                 typ = self.function_directory.global_var_table.variables[ctx.ID().getText()].type
-                self.operand_stack.append((value, typ))
+                self.operand_stack.append((name, typ))
             else:
-                value = self.function_directory.functions[self.current_function].var_table.variables[ctx.ID().getText()].value
+                name = self.function_directory.functions[self.current_function].var_table.variables[ctx.ID().getText()].name
                 typ = self.function_directory.functions[self.current_function].var_table.variables[ctx.ID().getText()].type
-                self.operand_stack.append((value, typ))
+                self.operand_stack.append((name, typ))
         return self.visitChildren(ctx)
     
 
@@ -106,8 +124,6 @@ class little_duckVisitor(ParseTreeVisitor):
             self.operand_stack.append((ctx.getText(), 'int'))      
         elif ctx.CTE_FLOAT():
             self.operand_stack.append((ctx.getText(), 'float'))
-
-        print
         return self.visitChildren(ctx)
     
 
@@ -121,8 +137,34 @@ class little_duckVisitor(ParseTreeVisitor):
 # Operaciones logicas 
     # Visit a parse tree produced by little_duckParser#assign.
     def visitAssign(self, ctx:little_duckParser.AssignContext):
-        return self.visitChildren(ctx)
-    
+      
+        id = ctx.ID().getText()
+        if self.current_function == 'global':
+            if id in self.function_directory.global_var_table.variables:
+                name = self.function_directory.global_var_table.variables[ctx.ID().getText()].name
+                typ = self.function_directory.global_var_table.variables[ctx.ID().getText()].type
+                self.operand_stack.append((name, typ))
+            else:
+                raise Exception('Variable not declared')
+                return
+        else:
+            if id in self.function_directory.functions[self.current_function].var_table.variables:
+                name = self.function_directory.global_var_table.variables[ctx.ID().getText()].name
+                typ = self.function_directory.global_var_table.variables[ctx.ID().getText()].type
+                self.operand_stack.append((name, typ))
+            else:
+                raise Exception('Variable not declared')
+                return
+            
+        check_and_pop(self, '=')
+        self.operator_stack.append(ctx.IGUAL().getText())
+
+
+        self.visitChildren(ctx)
+        pop_all(self)
+        return 
+
+
      # Visit a parse tree produced by little_duckParser#expression.
     def visitExpression(self, ctx:little_duckParser.ExpressionContext):
         return self.visitChildren(ctx)
@@ -135,13 +177,28 @@ class little_duckVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by little_duckParser#expression1.
     def visitExpression1(self, ctx:little_duckParser.Expression1Context):
+        if ctx.DIF():
+            check_and_pop(self, '!=')
+            self.operator_stack.append(ctx.DIF().getText())
+        elif ctx.MAYOR():
+            check_and_pop(self, '>')
+            self.operator_stack.append(ctx.MAYOR().getText())
+        elif ctx.MENOR():
+            check_and_pop(self, '<')
+            self.operator_stack.append(ctx.MENOR().getText())
+
         return self.visitChildren(ctx)
 
 
 # Operacion no lineales y print 
  # Visit a parse tree produced by little_duckParser#print.
     def visitPrint(self, ctx:little_duckParser.PrintContext):
-        return self.visitChildren(ctx)
+        self.visitChildren(ctx)
+        check_and_pop(self, 'PRNT')
+        self.operator_stack.append('PRNT')
+
+
+        return  self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by little_duckParser#print0.
@@ -156,6 +213,13 @@ class little_duckVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by little_duckParser#cycle.
     def visitCycle(self, ctx:little_duckParser.CycleContext):
+
+ 
+        
+
+
+        
+
         return self.visitChildren(ctx)
 
 
@@ -260,4 +324,53 @@ class little_duckVisitor(ParseTreeVisitor):
 
 
 
+
+
 del little_duckParser
+
+# Metodo para agregar cuadruplos
+def check_and_pop(self, operator):
+    #if operator has equal or higher precedence than top of stack, pop and generate quad
+
+    while self.operator_stack and self.priority[self.operator_stack[-1]] >= self.priority[operator]:
+        operator = self.operator_stack.pop()
+        right_operand = self.operand_stack.pop()
+        left_operand = self.operand_stack.pop()
+        add_cuad(self, operator, left_operand, right_operand)
+
+def pop_all(self):
+    while self.operator_stack:
+        operator = self.operator_stack.pop()
+        right_operand = self.operand_stack.pop()
+        left_operand = self.operand_stack.pop()
+        add_cuad(self, operator, left_operand, right_operand)
+
+def add_cuad(self, operator, left_operand, right_operand):
+    if operator == '=':
+        result_type = check_cubo_semantico(operator, left_operand[1], right_operand[1])
+        if result_type == 'Error':
+            print ('error')
+            print (left_operand, right_operand, operator)
+            print ( 'Res: ', result_type)
+            #raise Exception('Type mismatch')
+        cuad = Cuadroplo(operator, right_operand[0], None, left_operand[0], self.current_function)
+        self.quad_list.append(cuad)
+        self.quad_counter += 1
+    elif operator == 'PRNT':
+        quad = Cuadroplo(operator, None, None, left_operand[0], self.current_function)
+        self.quad_list.append(quad)
+        self.quad_counter += 1
+        
+    else:
+        result_type = check_cubo_semantico(operator, left_operand[1], right_operand[1])
+        if result_type == 'Error':
+            print ('error')
+            print (left_operand, right_operand, operator)
+            print ( 'Res: ', result_type)
+            #raise Exception('Type mismatch')
+        result = 't' + str(self.temp_counter)
+        self.temp_counter += 1
+        self.operand_stack.append((result, result_type))
+        quad = Cuadroplo(operator, left_operand[0], right_operand[0], result, self.current_function)
+        self.quad_list.append(quad)
+        self.quad_counter += 1

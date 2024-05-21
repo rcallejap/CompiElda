@@ -72,11 +72,11 @@ MAIN : 'main';
 
 //print 
 
-print: PRINTF PARI print0 PARD PUNTOYCOMA ;
+    print: PRINTF PARI print0 PARD PUNTOYCOMA ;
 
-print0: expression print1 |  CTE_STRING print1;
+    print0: expression print1 |  CTE_STRING print1;
 
-print1:  (COMA print0)?;  
+    print1:  (COMA print0)?;  
 
 //
 

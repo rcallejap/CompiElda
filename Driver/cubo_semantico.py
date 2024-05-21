@@ -38,7 +38,7 @@ cubo_semantico ={
 
 
 
-def check_cubo_semantico(op1_tipo, operador, op2_tipo):
+def check_cubo_semantico(operador, op1_tipo, op2_tipo):
 
     if op1_tipo in cubo_semantico and operador in cubo_semantico[op1_tipo]:
         if op2_tipo in cubo_semantico[op1_tipo][operador]:

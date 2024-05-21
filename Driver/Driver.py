@@ -25,7 +25,15 @@ def main(argv):
 
     print ("Operator: ", visitor.operator_stack)
     print ("Operand: ", visitor.operand_stack)
-    print ("Quads: ", visitor.quad_list)
+
+    print("Quads: ")
+    i = 1
+    for Cuadroplo in visitor.quad_list:
+        print(f"{i} ", end="")
+        Cuadroplo.test_print()
+        i += 1
+        
+
 
 
 

@@ -1,10 +1,14 @@
 
-class Cuadroplos:
-    def __init__ (self, op, left, right, result):
+class Cuadroplo:
+    def __init__ (self, op, left, right, result, scope):
         self.op = op
         self.left = left
         self.right = right
         self.result = result
+        self.scope = scope
+
+    def test_print(self): 
+        print(f" {self.op} {self.left} {self.right} {self.result} ({self.scope}) ")
     
 
 class Variable:

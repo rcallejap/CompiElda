@@ -1,5 +1,10 @@
 from data_structures import Variable, VarTable, Function, FunctionDirectory
+from cubo_semantico import check_cubo_semantico
 
+print('-', 'int', 'int')
+
+print (check_cubo_semantico('-', 'int', 'int'))
+'''
 # Create a FunctionDirectory object
 fd = FunctionDirectory()
 
@@ -27,4 +32,4 @@ fd.add_variable(v3, "foo")
 # Print the contents of the function directory
 fd.test_print()
 
-
+'''
