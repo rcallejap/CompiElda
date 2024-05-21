@@ -41,12 +41,17 @@ class little_duckVisitor(ParseTreeVisitor):
             '/': 3,
         }
 
+
 # Operaciones aritmeticas 
 
     # Visit a parse tree produced by little_duckParser#exp.
     def visitExp(self, ctx:little_duckParser.ExpContext):
-        
-        return self.visitChildren(ctx)
+        self.visit(ctx.termino())
+        if self.operator_stack:
+            if self.operator_stack[-1] == '+' or self.operator_stack[-1] == '-':
+                pop_and_add(self)
+        self.visit(ctx.exp0())
+        return 
 
 
     # Visit a parse tree produced by little_duckParser#exp0.
@@ -56,19 +61,23 @@ class little_duckVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by little_duckParser#exp1.
     def visitExp1(self, ctx:little_duckParser.Exp1Context):
-        if ctx.MAS():
-            check_and_pop(self, '+')
-            self.operator_stack.append(ctx.MAS().getText())
-        elif ctx.MENOS():
-            check_and_pop(self, '-')
-            self.operator_stack.append(ctx.MENOS().getText())
+        if ctx.MENOS():
+            self.operator_stack.append('-')
+        elif ctx.MAS():
+            self.operator_stack.append('+')
+
         return self.visitChildren(ctx)
 
 
 
     # Visit a parse tree produced by little_duckParser#termino.
     def visitTermino(self, ctx:little_duckParser.TerminoContext):
-        return self.visitChildren(ctx)
+        self.visit(ctx.factor())
+        if self.operator_stack:
+            if self.operator_stack[-1] == '*' or self.operator_stack[-1] == '/':
+                pop_and_add(self)
+        self.visit(ctx.termino0())
+        return 
 
 
     # Visit a parse tree produced by little_duckParser#termino0.
@@ -79,28 +88,26 @@ class little_duckVisitor(ParseTreeVisitor):
     # Visit a parse tree produced by little_duckParser#termino1.
     def visitTermino1(self, ctx:little_duckParser.Termino1Context):
         if ctx.POR():
-            check_and_pop(self, '*')
-            self.operator_stack.append(ctx.POR().getText())
+            self.operator_stack.append('*')
         elif ctx.DIV():
-            check_and_pop(self, '/')
-            self.operator_stack.append(ctx.DIV().getText())
+            self.operator_stack.append('/') 
+
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by little_duckParser#factor.
     def visitFactor(self, ctx:little_duckParser.FactorContext):
-        
-        return self.visitChildren(ctx)
+        if ctx.PARI():
+            self.operator_stack.append('(')
+            self.visit(ctx.expression())
+            self.operator_stack.pop()
+            return 
+        else :
+            return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by little_duckParser#factor0.
     def visitFactor0(self, ctx:little_duckParser.Factor0Context):
-        if ctx.MAS():
-            check_and_pop(self, '+')
-            self.operator_stack.append(ctx.MAS().getText())
-        elif ctx.MENOS():
-            check_and_pop(self, '-')
-            self.operator_stack.append(ctx.MENOS().getText())
         return self.visitChildren(ctx)
 
 
@@ -127,17 +134,10 @@ class little_duckVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
     
 
-
-
-
-
-
-
     
 # Operaciones logicas 
     # Visit a parse tree produced by little_duckParser#assign.
     def visitAssign(self, ctx:little_duckParser.AssignContext):
-      
         id = ctx.ID().getText()
         if self.current_function == 'global':
             if id in self.function_directory.global_var_table.variables:
@@ -154,55 +154,53 @@ class little_duckVisitor(ParseTreeVisitor):
                 self.operand_stack.append((name, typ))
             else:
                 raise Exception('Variable not declared')
-                return
-            
-        check_and_pop(self, '=')
-        self.operator_stack.append(ctx.IGUAL().getText())
-
-
-        self.visitChildren(ctx)
-        pop_all(self)
-        return 
+        
+        if ctx.IGUAL():
+            self.operator_stack.append('=')
+            self.visit(ctx.expression())
+            pop_and_add(self)
+        return  
 
 
      # Visit a parse tree produced by little_duckParser#expression.
+    
     def visitExpression(self, ctx:little_duckParser.ExpressionContext):
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by little_duckParser#expression0.
     def visitExpression0(self, ctx:little_duckParser.Expression0Context):
-        return self.visitChildren(ctx)
+        self.visitChildren(ctx)
+        if self.operator_stack:
+            if self.operator_stack[-1] == '>' or self.operator_stack[-1] == '<' or self.operator_stack[-1] == '!=':
+                pop_and_add(self)        
+        return 
 
 
     # Visit a parse tree produced by little_duckParser#expression1.
     def visitExpression1(self, ctx:little_duckParser.Expression1Context):
-        if ctx.DIF():
-            check_and_pop(self, '!=')
-            self.operator_stack.append(ctx.DIF().getText())
-        elif ctx.MAYOR():
-            check_and_pop(self, '>')
-            self.operator_stack.append(ctx.MAYOR().getText())
-        elif ctx.MENOR():
-            check_and_pop(self, '<')
-            self.operator_stack.append(ctx.MENOR().getText())
+        if ctx.MAYOR:
+            self.operator_stack.append('>')
+        elif ctx.MENOR:
+            self.operator_stack.append('<')
+        elif ctx.DIF:
+            self.operator_stack.append('!=')
 
         return self.visitChildren(ctx)
 
 
 # Operacion no lineales y print 
  # Visit a parse tree produced by little_duckParser#print.
-    def visitPrint(self, ctx:little_duckParser.PrintContext):
-        self.visitChildren(ctx)
-        check_and_pop(self, 'PRNT')
+    def visitPrint(self, ctx:little_duckParser.PrintContext): 
         self.operator_stack.append('PRNT')
-
-
+        
         return  self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by little_duckParser#print0.
     def visitPrint0(self, ctx:little_duckParser.Print0Context):
+        self.visitChildren(ctx)
+        pop_and_add(self)
         return self.visitChildren(ctx)
 
 
@@ -211,19 +209,58 @@ class little_duckVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+
     # Visit a parse tree produced by little_duckParser#cycle.
     def visitCycle(self, ctx:little_duckParser.CycleContext):
-        return self.visitChildren(ctx)
+        # cycle: DO body WHILE PARI expression PARD PUNTOYCOMA;
+        self.jump_stack.append(self.quad_counter)
+        self.visit(ctx.body())
+        self.visit(ctx.expression())
+        result = self.operand_stack.pop()
+        if result[1] != 'bool':
+            print ('error')
+            #raise Exception('Type mismatch')
+        self.operator_stack.append('GOTOF')
+        pop_and_add(self)
+        end = self.jump_stack.pop()
+        self.operand_stack.append('GOTO')
+        pop_and_add(self)
+        self.quad_list[self.jump_stack.pop() - 1].result = self.quad_counter + 1
+        self.quad_list[self.quad_counter - 1].result = end + 1
+        return
 
+    
 
     # Visit a parse tree produced by little_duckParser#condition.
     def visitCondition(self, ctx:little_duckParser.ConditionContext):
-        return self.visitChildren(ctx)
+        self.visit(ctx.expression())
+
+        result = self.operand_stack.pop()
+        if result[1] != 'bool':
+            print ('error')
+            #raise Exception('Type mismatch')
+        
+        self.operator_stack.append('GOTOF')
+        pop_and_add(self)
+        self.jump_stack.append(self.quad_counter)
+
+        self.visitChildren(ctx)
+
+        self.operand_stack.append('GOTO')
+        pop_and_add(self)
+        self.jump_stack.append(self.quad_counter)
+        self.quad_list[self.jump_stack.pop() - 1].result = self.quad_counter + 1 
+        
+        return 
 
 
     # Visit a parse tree produced by little_duckParser#condition0.
     def visitCondition0(self, ctx:little_duckParser.Condition0Context):
+        end = self.jump_stack.pop()
+        self.quad_list[end - 1].result = self.quad_counter + 1
+        
         return self.visitChildren(ctx)
+
 
 
 #Otros metodos
@@ -321,41 +358,6 @@ class little_duckVisitor(ParseTreeVisitor):
 
 del little_duckParser
 
-def pop_and_add(self):
-    operator = self.operator_stack.pop()
-    right_operand = self.operand_stack.pop()
-    left_operand = self.operand_stack.pop()
-    add_cuad(self, operator, left_operand, right_operand)
-
-
-# Metodo para agregar cuadruplos
-def check_and_pop(self, operator):
-    
-    #if operator has equal or higher precedence than top of stack, pop and generate quad
-    print('oper', self.operator_stack)
-    print('operand', self.operand_stack)
-
-    while self.operator_stack and self.priority[self.operator_stack[-1]] >= self.priority[operator]:
-
-        operator = self.operator_stack.pop()
-        right_operand = self.operand_stack.pop()
-        left_operand = self.operand_stack.pop()
-        add_cuad(self, operator, left_operand, right_operand)
-        
-
-    
-    
-
-
-def pop_all(self):
-    print('*oper', self.operator_stack)
-    print('*operand', self.operand_stack)
-    while self.operator_stack:
-        operator = self.operator_stack.pop()
-        right_operand = self.operand_stack.pop()
-        left_operand = self.operand_stack.pop()
-        add_cuad(self, operator, left_operand, right_operand)
-
 def add_cuad(self, operator, left_operand, right_operand):
     if operator == '=':
         result_type = check_cubo_semantico(operator, left_operand[1], right_operand[1])
@@ -385,3 +387,53 @@ def add_cuad(self, operator, left_operand, right_operand):
         quad = Cuadroplo(operator, left_operand[0], right_operand[0], result, self.current_function)
         self.quad_list.append(quad)
         self.quad_counter += 1
+
+
+def pop_and_add(self):
+    if self.operator_stack[-1] in ('PRNT', 'GOTO', 'GOTOF', 'GOTOV'):
+        operator = self.operator_stack.pop()
+        left_operand = self.operand_stack.pop()
+        add_cuad(self, operator, left_operand, None)
+        return
+    
+
+    operator = self.operator_stack.pop()
+    right_operand = self.operand_stack.pop()
+    left_operand = self.operand_stack.pop()
+    add_cuad(self, operator, left_operand, right_operand)
+
+
+
+
+
+
+
+
+##Metodos Inutiles 
+# Metodo para agregar cuadruplos
+def check_and_pop(self, operator):
+    
+    #if operator has equal or higher precedence than top of stack, pop and generate quad
+    print('oper', self.operator_stack)
+    print('operand', self.operand_stack)
+
+    while self.operator_stack and self.priority[self.operator_stack[-1]] >= self.priority[operator]:
+        operator = self.operator_stack.pop()
+        right_operand = self.operand_stack.pop()
+        left_operand = self.operand_stack.pop()
+        add_cuad(self, operator, left_operand, right_operand)
+        
+
+    
+    
+
+
+def pop_all(self):
+    print('*oper', self.operator_stack)
+    print('*operand', self.operand_stack)
+    while self.operator_stack:
+        operator = self.operator_stack.pop()
+        right_operand = self.operand_stack.pop()
+        left_operand = self.operand_stack.pop()
+        add_cuad(self, operator, left_operand, right_operand)
+

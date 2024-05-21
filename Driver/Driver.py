@@ -27,7 +27,7 @@ def main(argv):
     print ("Operand: ", visitor.operand_stack)
 
     print("Quads: ")
-    i = 1
+    i = 0
     for Cuadroplo in visitor.quad_list:
         print(f"{i} ", end="")
         Cuadroplo.test_print()
