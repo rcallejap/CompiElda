@@ -330,15 +330,26 @@ del little_duckParser
 
 # Metodo para agregar cuadruplos
 def check_and_pop(self, operator):
+    
     #if operator has equal or higher precedence than top of stack, pop and generate quad
+    print('oper', self.operator_stack)
+    print('operand', self.operand_stack)
 
     while self.operator_stack and self.priority[self.operator_stack[-1]] >= self.priority[operator]:
+
         operator = self.operator_stack.pop()
         right_operand = self.operand_stack.pop()
         left_operand = self.operand_stack.pop()
         add_cuad(self, operator, left_operand, right_operand)
+        
+
+    
+    
+
 
 def pop_all(self):
+    print('*oper', self.operator_stack)
+    print('*operand', self.operand_stack)
     while self.operator_stack:
         operator = self.operator_stack.pop()
         right_operand = self.operand_stack.pop()
