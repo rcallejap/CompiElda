@@ -8,8 +8,12 @@ program programa1;
 
 
       
-       if (a < b) {
-          
+       do {
+         a + a+1
+       } while (a < b); 
+
+       if (a> b){
+         a = a +1
        }
 
 

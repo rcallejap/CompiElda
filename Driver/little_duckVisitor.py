@@ -212,53 +212,91 @@ class little_duckVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by little_duckParser#cycle.
     def visitCycle(self, ctx:little_duckParser.CycleContext):
-        # cycle: DO body WHILE PARI expression PARD PUNTOYCOMA;
-        self.jump_stack.append(self.quad_counter)
-        self.visit(ctx.body())
-        self.visit(ctx.expression())
-        result = self.operand_stack.pop()
-        if result[1] != 'bool':
-            print ('error')
-            #raise Exception('Type mismatch')
-        self.operator_stack.append('GOTOF')
-        pop_and_add(self)
-        end = self.jump_stack.pop()
-        self.operand_stack.append('GOTO')
-        pop_and_add(self)
-        self.quad_list[self.jump_stack.pop() - 1].result = self.quad_counter + 1
-        self.quad_list[self.quad_counter - 1].result = end + 1
-        return
+        start_loop_quad = self.quad_counter  # Mark the start of the loop
+        self.jump_stack.append(start_loop_quad)
+        
+        self.visit(ctx.body())  # Process the loop body
+        
+        self.visit(ctx.expression())  # Evaluate the condition
+        
+        condition_result = self.operand_stack.pop()  # Get the result of the condition
+        if condition_result[1] != 'bool':
+            raise Exception('Condition expression must be boolean')
+        
+        end_loop_quad = self.quad_counter  # The quad where we evaluate the condition
+        
+        # Create a quad for the condition evaluation
+        quad = Cuadroplo('GOTOF', condition_result[0], None, None, self.current_function)
+        self.quad_list.append(quad)
+        self.quad_counter += 1
+        
+        # Create a quad for jumping back to the start of the loop if the condition is true
+        quad = Cuadroplo('GOTO', None, None, start_loop_quad, self.current_function)
+        self.quad_list.append(quad)
+        self.quad_counter += 1
+        
+        # Fill the false jump quad with the address of the quad after the loop
+        self.quad_list[end_loop_quad].result = self.quad_counter
+        
+        return self.visitChildren(ctx)
+
 
     
 
     # Visit a parse tree produced by little_duckParser#condition.
-    def visitCondition(self, ctx:little_duckParser.ConditionContext):
-        self.visit(ctx.expression())
-
-        result = self.operand_stack.pop()
-        if result[1] != 'bool':
-            print ('error')
-            #raise Exception('Type mismatch')
+    # Visit a parse tree produced by little_duckParser#condition.
+def visitCondition(self, ctx: little_duckParser.ConditionContext):
+    # Step 1: Evaluate the condition expression
+    self.visit(ctx.expression())
+    
+    # Step 2: Create a quad for the conditional jump
+    condition_result = self.operand_stack.pop()
+    if condition_result[1] != 'bool':
+        raise Exception('Condition expression must be boolean')
+    
+    quad = Cuadroplo('GOTOF', condition_result[0], None, None, self.current_function)
+    self.quad_list.append(quad)
+    self.quad_counter += 1
+    
+    # Save the position of the GOTOF quad to update it later
+    false_jump_index = self.quad_counter - 1
+    
+    # Step 3: Visit the body of the IF statement
+    self.visit(ctx.body())
+    
+    # Step 4: Handle the optional ELSE part
+    if ctx.condition0().getChildCount() > 0:
+        # Create a GOTO quad for the end of the IF body
+        quad = Cuadroplo('GOTO', None, None, None, self.current_function)
+        self.quad_list.append(quad)
+        self.quad_counter += 1
         
-        self.operator_stack.append('GOTOF')
-        pop_and_add(self)
-        self.jump_stack.append(self.quad_counter)
-
-        self.visitChildren(ctx)
-
-        self.operand_stack.append('GOTO')
-        pop_and_add(self)
-        self.jump_stack.append(self.quad_counter)
-        self.quad_list[self.jump_stack.pop() - 1].result = self.quad_counter + 1 
+        # Save the position of the GOTO quad to update it later
+        end_if_jump_index = self.quad_counter - 1
         
-        return 
+        # Update the GOTOF quad to jump to the ELSE part
+        self.quad_list[false_jump_index].result = self.quad_counter
+        
+        # Visit the body of the ELSE statement
+        self.visit(ctx.condition0().body())
+        
+        # Update the GOTO quad to jump to the end of the ELSE part
+        self.quad_list[end_if_jump_index].result = self.quad_counter
+    else:
+        # If there is no ELSE part, update the GOTOF quad to jump to the end of the IF body
+        self.quad_list[false_jump_index].result = self.quad_counter
+    
+    return self.visitChildren(ctx)
+
+
+# Visit a parse tree produced by little_duckParser#condition0.
+def visitCondition0(self, ctx: little_duckParser.Condition0Context):
+    return self.visitChildren(ctx)
+
 
 
     # Visit a parse tree produced by little_duckParser#condition0.
     def visitCondition0(self, ctx:little_duckParser.Condition0Context):
-        end = self.jump_stack.pop()
-        self.quad_list[end - 1].result = self.quad_counter + 1
-        
         return self.visitChildren(ctx)
 
 
