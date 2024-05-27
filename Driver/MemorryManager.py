@@ -12,70 +12,61 @@ from cubo_semantico import check_cubo_semantico
 
 
 class MemoryManager:
-    def __init__(self, function_directory, constDir) : 
-        self.function_directory = function_directory
-        self.memory = []
+    def __init__(self, funcDir, constDir) : 
+        self.funcDir = funcDir
+        self.memoryInt = []
+        self.memoryFloat = []
+        self.memoryBool = []
+        self.memoryString = []
         # make the memory array 10000 sizees and full of None
-        self.memoryCount = {
-            "int": {
-                "global": 1000,
-                "const": 1300,
-                "temp": 1600,
-                "local": 1900
-            },
-            "float": {
-                "global": 2000,
-                "local": 2300,
-                "temp": 2600,
-                "local":2900
-
-            },
-            "bool" : {
-                "global": 3000,
-                "local": 3300,
-                "temp": 3600,
-                "local": 3900 
-            },
-            "string" : {
-                "global": 4000,
-                "local": 4300,
-                "temp": 4600, 
-                "local": 4900
-            }
-        }
-
-
-        for var in function_directory.global_var_table.variables.values():
-            self.add_variable(var, "global")
         
+        self.intCount = 0
+        self.floatCount = 0
+        self.boolCount = 0
+        self.stringCount = 0
+
+        VarTable = funcDir.global_var_table
         
-        for function in function_directory.functions.values():
-            self.add_function(function)
+        VarTable.print_table()
 
+        for var in VarTable.variables:
+            if VarTable.variables[var].type == "int":
+                self.memoryInt.append(None)
+                varDir = 1000 + self.intCount
+                VarTable.variables[var].dir = varDir
+                self.intCount += 1
+            elif VarTable.variables[var].type == "float":
+                self.memoryFloat.append(None)
+                varDir = 2000 + self.floatCount
+                VarTable.variables[var].dir = varDir
+                self.floatCount += 1
+            elif VarTable.variables[var].type == "bool":
+                self.memoryBool.append(None)
+                varDir = 3000 + self.boolCount
+                VarTable.variables[var].dir = varDir
+                self.boolCount += 1
+            elif VarTable.variables[var].type == "string":
+                self.memoryString.append(None)
+                varDir = 4000 + self.stringCount
+                VarTable.variables[var].dir = varDir
+                self.stringCount += 1
+            
+ 
 
-
-    def add_variable(self, variable, scope): 
-        memory = self.get_memory(variable.type, scope)
-        print (variable.name, " ",  memory)
-
-        #variable.dir = memory
-        #self.memory[memory] = variable
-        self.memoryCount[scope][variable.type] += 1   
-
-
-
-    def get_memory(self, var_type, scope):
-        if scope == "global":
-            return self.memory["global"][var_type]
-        elif scope == "local":
-            return self.memory["local"][var_type]
-        elif scope == "temp":
-            return self.memory["temp"][var_type]
-        else:
-            raise Exception(f"Scope '{scope}' not recognized")
-        
-
-    def add_function(self, function):
-        for var in function.var_table.variables.values():
-            self.add_variable(var, "local")
-        self.function_directory.add_function(function)
+        for const in constDir.constants:
+            if constDir.constants[const].type == "int":
+                self.memoryInt.append(constDir.constants[const].value)
+                constDir.constants[const].dir = 1000 + self.intCount
+                self.intCount += 1
+            elif constDir.constants[const].type == "float":
+                self.memoryFloat.append(constDir.constants[const].value)
+                constDir.constants[const].dir = 2000 + self.floatCount
+                self.floatCount += 1
+            elif constDir.constants[const].type == "bool":
+                self.memoryBool.append(constDir.constants[const].value)
+                constDir.constants[const].dir = 3000 + self.boolCount
+                self.boolCount += 1
+            elif constDir.constants[const].type == "string":
+                self.memoryString.append(constDir.constants[const].value)
+                constDir.constants[const].dir = 4000 + self.stringCount
+                self.stringCount += 1

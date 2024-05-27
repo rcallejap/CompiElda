@@ -22,6 +22,11 @@ class VarTable:
     def __init__(self):
         self.variables = {} #diccionario de variables
 
+    def print_table(self):
+        for var in self.variables.values():
+            print(f"{var.name} : {var.type} = {var.dir}")
+
+
 class Function:
     def __init__(self,name ):
         self.name = name
@@ -40,25 +45,27 @@ class FunctionDirectory:
         self.functions[functionN] = Function(functionN) 
 
 
-    def add_variable(self, variable, function_name):
+    def add_variable(self, name , tipo, function_name):
         #if the function name does not exist raise an exception
         if function_name != "global" and function_name not in self.functions:
             raise Exception(f"Function '{function_name}' not declared")
 
-        if variable.name in self.global_var_table.variables:
-            raise Exception(f"Variable '{variable.name}' already declared")        
+        if name in self.global_var_table.variables:
+            raise Exception(f"Variable '{name}' already declared")        
         
         if function_name == "global":
-            self.global_var_table.variables[variable.name] = variable
+            var = Variable(name, tipo)
+
+            self.global_var_table.variables[name] = var
         
         else:
-            if variable.name in self.functions[function_name].var_table.variables:
-                raise Exception(f"Variable '{variable.name}' already declared")
+            if name in self.functions[function_name].var_table.variables:
+                raise Exception(f"Variable '{name}' already declared")
             
             if function_name not in self.functions:
                 raise Exception(f"Function '{function_name}' not declared")
-            
-            self.functions[function_name].var_table.variables[variable.name] = variable
+            var = Variable(name, tipo)
+            self.functions[function_name].var_table.variables[name] = var
 
     def test_print(self):
         print("Global var table")
@@ -78,6 +85,8 @@ class constant:
         self.value = value
         self.type = vtype
         self.dir = None
+        #remove 
+        self.name = value
 
     def test_print(self):
         print(f"{self.value} : {self.type}")

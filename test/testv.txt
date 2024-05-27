@@ -1,12 +1,11 @@
 program programa1;
-    var a, b : int;
+    var a, b : int,  c : float;
+
 
     main {
        b = (a + 2) * 3 * 4 * 5 + 6 + 7 + 8 + 9 * 10  ;
-       a = (12 * 5) > 7;
+       a = (12 * 5) - 7;
        printf(a);
-
-
       
        do {
          a = a + 1;
@@ -14,7 +13,7 @@ program programa1;
 
        if (a> b){
          a = a + 1; 
-       }
+       };
 
 
 

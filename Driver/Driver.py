@@ -17,11 +17,14 @@ def main(argv):
     walker = ParseTreeWalker()
     walker.walk(listener, tree)
 
-    funcDir = listener.function_directory
+    funcDir = listener.functionDirectory
+    constDir = listener.ConstantTable 
+
+    MemoryManager(funcDir, constDir)
 
 
     #entrega 3
-    visitor = little_duckVisitor(funcDir)
+    visitor = little_duckVisitor(funcDir, constDir)
     visitor.visit(tree)
 
     print ("Operator: ", visitor.operator_stack)

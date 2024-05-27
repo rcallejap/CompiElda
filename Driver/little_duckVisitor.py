@@ -13,10 +13,12 @@ from cubo_semantico import check_cubo_semantico
 
 class little_duckVisitor(ParseTreeVisitor):
 
-    def __init__(self, function_directory):
+    def __init__(self, function_directory, constant_directory):
         self.function_directory = function_directory
         self.current_function = 'global'
         self.current_var_table = self.function_directory.global_var_table
+        self.constant_directory = constant_directory
+
         
         self.quad_list = []
         self.current_quad = None
@@ -115,22 +117,20 @@ class little_duckVisitor(ParseTreeVisitor):
     def visitFactor1(self, ctx:little_duckParser.Factor1Context):
         if ctx.ID():
             if self.current_function == 'global':
-                name = self.function_directory.global_var_table.variables[ctx.ID().getText()].name
-                typ = self.function_directory.global_var_table.variables[ctx.ID().getText()].type
-                self.operand_stack.append((name, typ))
+                var = self.function_directory.global_var_table.variables[ctx.ID().getText()]
+                self.operand_stack.append(var)
             else:
-                name = self.function_directory.functions[self.current_function].var_table.variables[ctx.ID().getText()].name
-                typ = self.function_directory.functions[self.current_function].var_table.variables[ctx.ID().getText()].type
-                self.operand_stack.append((name, typ))
+                var = self.function_directory.functions[self.current_function].var_table.variables[ctx.ID().getText()]
+                self.operand_stack.append(var)
         return self.visitChildren(ctx)
     
 
     # Visit a parse tree produced by little_duckParser#cte.
     def visitCte(self, ctx:little_duckParser.CteContext):
         if ctx.CTE_INT():
-            self.operand_stack.append((ctx.getText(), 'int'))      
+            self.operand_stack.append(self.constant_directory.constants[ctx.CTE_INT().getText()])
         elif ctx.CTE_FLOAT():
-            self.operand_stack.append((ctx.getText(), 'float'))
+            self.operand_stack.append(self.constant_directory.constants[ctx.CTE_FLOAT().getText()])
         return self.visitChildren(ctx)
     
 
@@ -141,17 +141,15 @@ class little_duckVisitor(ParseTreeVisitor):
         id = ctx.ID().getText()
         if self.current_function == 'global':
             if id in self.function_directory.global_var_table.variables:
-                name = self.function_directory.global_var_table.variables[ctx.ID().getText()].name
-                typ = self.function_directory.global_var_table.variables[ctx.ID().getText()].type
-                self.operand_stack.append((name, typ))
+                var = self.function_directory.global_var_table.variables[id]
+                self.operand_stack.append(var)
             else:
                 raise Exception('Variable not declared')
                 return
         else:
             if id in self.function_directory.functions[self.current_function].var_table.variables:
-                name = self.function_directory.global_var_table.variables[ctx.ID().getText()].name
-                typ = self.function_directory.global_var_table.variables[ctx.ID().getText()].type
-                self.operand_stack.append((name, typ))
+                var = self.function_directory.functions[self.current_function].var_table.variables[id]
+                self.operand_stack.append(var)
             else:
                 raise Exception('Variable not declared')
         
@@ -192,14 +190,20 @@ class little_duckVisitor(ParseTreeVisitor):
 # Operacion no lineales y print 
  # Visit a parse tree produced by little_duckParser#print.
     def visitPrint(self, ctx:little_duckParser.PrintContext): 
-        self.operator_stack.append('PRNT')
-        
-        return  self.visitChildren(ctx)
+        self.visitChildren(ctx)
+        #self.operator_stack.append('PRNT')
+        #self.operand_stack.append('endl')
+        #pop_and_add(self)
+
+        return  
 
 
     # Visit a parse tree produced by little_duckParser#print0.
     def visitPrint0(self, ctx:little_duckParser.Print0Context):
+        '''if ctx.CTE_STRING():
+            self.operand_stack.append((ctx.CTE_STRING().getText(), 'string'))'''
         self.visitChildren(ctx)
+        self.operator_stack.append('PRNT')
         pop_and_add(self)
         return 
 
@@ -353,42 +357,40 @@ del little_duckParser
 
 def add_cuad(self, operator, left_operand, right_operand):
     if operator == '=':
-        result_type = check_cubo_semantico(operator, left_operand[1], right_operand[1])
+        result_type = check_cubo_semantico(operator, left_operand.type , right_operand.type)
         if result_type == 'Error':
             print ('error')
             print (left_operand, right_operand, operator)
             print ( 'Res: ', result_type)
             #raise Exception('Type mismatch')
-        cuad = Cuadroplo(operator, right_operand[0], None, left_operand[0], self.current_function)
+        cuad = Cuadroplo(operator, right_operand.name, None, left_operand.name, self.current_function)
         self.quad_list.append(cuad)
         self.quad_counter += 1
 
     elif operator == 'PRNT':
-        quad = Cuadroplo(operator, None, None, left_operand[0], self.current_function)
+        quad = Cuadroplo(operator, None, None, left_operand.name, self.current_function)
         self.quad_list.append(quad)
         self.quad_counter += 1
 
-    elif operator in ('GOTO'):
+    elif operator == 'GOTO':
         quad = Cuadroplo(operator, None, None, None, self.current_function)
         self.quad_list.append(quad)
         self.quad_counter += 1
 
-    elif operator in ('GOTOV'):
+    elif operator == 'GOTOV':
         jump = self.jump_stack.pop()
-        quad = Cuadroplo(operator, left_operand[0], None, jump, self.current_function)
+        quad = Cuadroplo(operator, left_operand.name, None, jump, self.current_function)
         self.quad_list.append(quad)
         self.quad_counter += 1
 
-    elif operator in ('GOTOF'):
-        quad = Cuadroplo(operator, left_operand[0], None, None, self.current_function)
+    elif operator == 'GOTOF':
+        quad = Cuadroplo(operator, left_operand.name, None, None, self.current_function)
         self.quad_list.append(quad)
         self.quad_counter += 1
-
-         
 
         
     else:
-        result_type = check_cubo_semantico(operator, left_operand[1], right_operand[1])
+        result_type = check_cubo_semantico(operator, left_operand.type, right_operand.type)
         if result_type == 'Error':
             print ('error')
             print (left_operand, right_operand, operator)
@@ -396,26 +398,28 @@ def add_cuad(self, operator, left_operand, right_operand):
             #raise Exception('Type mismatch')
         result = 't' + str(self.temp_counter)
         self.temp_counter += 1
-        self.operand_stack.append((result, result_type))
-        quad = Cuadroplo(operator, left_operand[0], right_operand[0], result, self.current_function)
+        self.function_directory.add_variable(result, result_type, self.current_function)
+        var = self.current_var_table.variables[result]
+
+        self.operand_stack.append(var)
+        quad = Cuadroplo(operator, left_operand.name, right_operand.name, result, self.current_function)
         self.quad_list.append(quad)
         self.quad_counter += 1
 
 
 def pop_and_add(self):
-    if self.operator_stack[-1] in ('GOTO'):
-        print ('GOTO')
+    if self.operator_stack[-1] == 'GOTO':
         operator = self.operator_stack.pop()
         add_cuad(self, operator, None, None)
         return
     
-    elif self.operator_stack[-1] in ('PRNT', 'GOTOV'):
+    elif self.operator_stack[-1] == ('PRNT') or self.operator_stack[-1] == 'GOTOV':
         operator = self.operator_stack.pop()
         left_operand = self.operand_stack.pop()
         add_cuad(self, operator, left_operand, None)
         return
     
-    elif self.operator_stack[-1] in ('GOTOF'):
+    elif self.operator_stack[-1] == 'GOTOF':
         operator = self.operator_stack.pop()
         left_operand = self.operand_stack.pop()
         add_cuad(self, operator, left_operand, None)

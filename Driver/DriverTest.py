@@ -10,24 +10,33 @@ def main(argv):
     lexer = little_duckLexer(input_stream)
     stream = CommonTokenStream(lexer)
     parser = little_duckParser(stream)
-    tree = parser.start_()
+    tree = parser.start_() 
     
     #entrega 2
     listener = little_duckListener()
     walker = ParseTreeWalker()
     walker.walk(listener, tree)
 
-    funcDir = listener.function_directory
+    funcDir = listener.functionDirectory
     constDir = listener.ConstantTable 
 
-    funcDir.test_print()
-    print("const:") 
-    constDir.test_print() 
+    MemoryManager(funcDir, constDir)
 
-    #memorry = MemoryManager(funcDir, constDir)
-    #memoryArr = memorry.memory
 
-    ##print(memoryArr)
+    #entrega 3
+    visitor = little_duckVisitor(funcDir, constDir)
+    visitor.visit(tree)
+
+    print ("Operator: ", visitor.operator_stack)
+    print ("Operand: ", visitor.operand_stack)
+
+    print("Quads: ")
+    i = 0
+    for Cuadroplo in visitor.quad_list:
+        print(f"{i} ", end="")
+        Cuadroplo.test_print()
+        i += 1
+
 
 
 
