@@ -87,7 +87,7 @@ MAIN : 'main';
 //condition 
     condition: IF PARI expression PARD body condition0;
 
-    condition0: (ELSE body PUNTOYCOMA)?; 
+    condition0: (ELSE body )? PUNTOYCOMA; 
 //
 
 //expression 
