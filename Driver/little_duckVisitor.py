@@ -13,11 +13,13 @@ from cubo_semantico import check_cubo_semantico
 
 class little_duckVisitor(ParseTreeVisitor):
 
-    def __init__(self, function_directory, constant_directory):
+    def __init__(self, function_directory, constant_directory, memMan):
         self.function_directory = function_directory
         self.current_function = 'global'
         self.current_var_table = self.function_directory.global_var_table
         self.constant_directory = constant_directory
+
+        self.memorryCountA = memMan 
 
         
         self.quad_list = []
@@ -399,10 +401,34 @@ def add_cuad(self, operator, left_operand, right_operand):
         result = 't' + str(self.temp_counter)
         self.temp_counter += 1
         self.function_directory.add_variable(result, result_type, self.current_function)
+        dir =0 
+        if result_type== 'int':
+            dir = self.memorryCountA[0] + 1000
+            self.memorryCountA[0] += 1
+        elif result_type == 'float':
+            dir = self.memorryCountA[1] + 2000
+            self.memorryCountA[1] += 1
+        elif result_type == 'bool':
+            dir = self.memorryCountA[2] + 3000
+            self.memorryCountA[2] += 1
+        elif result_type == 'string':
+            dir = self.memorryCountA[3] + 4000
+            self.memorryCountA[3] += 1
+
+        if self.current_function == 'global':
+            self.function_directory.global_var_table.variables[result].dir = dir
+        else:
+            self.function_directory.functions[self.current_function].var_table.variables[result].dir = dir
+
+            
+
         var = self.current_var_table.variables[result]
 
         self.operand_stack.append(var)
-        quad = Cuadroplo(operator, left_operand.name, right_operand.name, result, self.current_function)
+        #Borrar esto
+        #var = var.name, ':', var.type, '=', var.dir
+
+        quad = Cuadroplo(operator, left_operand.name, right_operand.name, var.name, self.current_function)
         self.quad_list.append(quad)
         self.quad_counter += 1
 

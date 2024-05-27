@@ -26,8 +26,7 @@ class MemoryManager:
         self.stringCount = 0
 
         VarTable = funcDir.global_var_table
-        
-        VarTable.print_table()
+    
 
         for var in VarTable.variables:
             if VarTable.variables[var].type == "int":
@@ -70,3 +69,29 @@ class MemoryManager:
                 self.memoryString.append(constDir.constants[const].value)
                 constDir.constants[const].dir = 4000 + self.stringCount
                 self.stringCount += 1
+
+    def update(self, MemorryCountArrayCopy):
+        intDif = MemorryCountArrayCopy[0] - self.intCount
+        floatDif = MemorryCountArrayCopy[1] - self.floatCount
+        boolDif = MemorryCountArrayCopy[2] - self.boolCount
+        stringDif = MemorryCountArrayCopy[3] - self.stringCount
+
+        for i in range(intDif):
+            self.memoryInt.append(None)
+            self.intCount += 1
+        for i in range(floatDif):
+            self.memoryFloat.append(None)
+            self.floatCount += 1
+        for i in range(boolDif):
+            self.memoryBool.append(None)
+            self.boolCount += 1
+        for i in range(stringDif):
+            self.memoryString.append(None)
+            self.stringCount += 1
+
+        print("Memory updated")
+        print(self.memoryInt)
+        print(self.memoryFloat)
+        print(self.memoryBool)
+        print(self.memoryString)
+       

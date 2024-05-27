@@ -1,5 +1,5 @@
 program programa1;
-    var a, b : int,  c : float;
+    var a, b : int;  c : float;
 
 
     main {
