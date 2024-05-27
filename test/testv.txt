@@ -9,11 +9,11 @@ program programa1;
 
       
        do {
-         a + a+1
+         a = a + 1;
        } while (a < b); 
 
        if (a> b){
-         a = a +1
+         a = a + 1; 
        }
 
 

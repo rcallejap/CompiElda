@@ -14,7 +14,7 @@ if "." in __name__:
 else:
     from little_duckParser import little_duckParser
 
-from data_structures import Variable, VarTable, Function, FunctionDirectory
+from data_structures import Variable, VarTable, Function, FunctionDirectory, ConstantTable
 
 
 # This class defines a complete listener for a parse tree produced by little_duckParser.
@@ -26,6 +26,7 @@ class little_duckListener(ParseTreeListener):
         self.current_function = ""
         self.current_type = None
         self.current_var_arr = []
+        self.ConstantTable = ConstantTable()
 
 
     #DFTV2-PN:  1
@@ -248,6 +249,10 @@ class little_duckListener(ParseTreeListener):
 
     # Enter a parse tree produced by little_duckParser#cte.
     def enterCte(self, ctx:little_duckParser.CteContext):
+        if ctx.CTE_INT():
+            self.ConstantTable.add_constant(ctx.CTE_INT().getText(), "int")
+        elif ctx.CTE_FLOAT():
+            self.ConstantTable.add_constant(ctx.CTE_FLOAT().getText(), "float")
         pass
 
     # Exit a parse tree produced by little_duckParser#cte.

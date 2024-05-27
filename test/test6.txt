@@ -4,9 +4,28 @@ program programa6;
         a = 0;
         b = 10;
 
+        printf (a);
+
         do { 
             a = a + 1  ;
             }
-        while ( a < 10 );
+        while ( a < 10 ); 
+
+        b = a + b; 
+
+        printf(b);
+
+        if (a>b){
+            printf(a);
+        }
+
+        else {
+            printf(b); 
+        }; 
+
+        a = 1 + 1;
+
+
+
     
      } end

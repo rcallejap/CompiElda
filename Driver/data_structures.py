@@ -1,4 +1,4 @@
-
+# Estrucutras de datos de cuadruplo
 class Cuadroplo:
     def __init__ (self, op, left, right, result, scope):
         self.op = op
@@ -11,26 +11,21 @@ class Cuadroplo:
         print(f" {self.op} {self.left} {self.right} {self.result} ({self.scope}) ")
     
 
+## Estructuras de datos de la tabla de funciones
 class Variable:
-    def __init__(self, name, vtype, value=None):
+    def __init__(self, name, vtype):
         self.name = name 
         self.type = vtype
-        self.value = value
-
-
+        self.dir = None
 
 class VarTable:
     def __init__(self):
         self.variables = {} #diccionario de variables
 
-
-
-#objeto funcion 
 class Function:
     def __init__(self,name ):
         self.name = name
         self.var_table = VarTable() #tabla de variables de la funcion
-
 
 class FunctionDirectory:
     def __init__(self):
@@ -68,13 +63,37 @@ class FunctionDirectory:
     def test_print(self):
         print("Global var table")
         for var in self.global_var_table.variables.values():
-            print(f"{var.name} : {var.type} = {var.value}")
+            print(f"{var.name} : {var.type} = {var.dir}")
 
         print("_Functions:")
         for function in self.functions.values():
             print(f"    Function {function.name}")
             for var in function.var_table.variables.values():
-                print(f"        {var.name} : {var.type} = {var.value}")
+                print(f"        {var.name} : {var.type} = {var.dir}")
             
             
+# Estructuras de datos de la tabla de constantes
+class constant:
+    def __init__(self, value, vtype):
+        self.value = value
+        self.type = vtype
+        self.dir = None
 
+    def test_print(self):
+        print(f"{self.value} : {self.type}")
+
+class ConstantTable:
+    def __init__(self):
+        self.constants = {} #diccionario de constantes
+
+    def add_constant(self, value, vtype):
+        cons = constant(value, vtype)          
+        if cons.value in self.constants:
+            return 
+        self.constants[cons.value] = cons
+        return 
+
+
+    def test_print(self):
+        for constant in self.constants.values():
+            constant.test_print()

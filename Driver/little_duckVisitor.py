@@ -201,7 +201,7 @@ class little_duckVisitor(ParseTreeVisitor):
     def visitPrint0(self, ctx:little_duckParser.Print0Context):
         self.visitChildren(ctx)
         pop_and_add(self)
-        return self.visitChildren(ctx)
+        return 
 
 
     # Visit a parse tree produced by little_duckParser#print1.
@@ -212,92 +212,47 @@ class little_duckVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by little_duckParser#cycle.
     def visitCycle(self, ctx:little_duckParser.CycleContext):
-        start_loop_quad = self.quad_counter  # Mark the start of the loop
-        self.jump_stack.append(start_loop_quad)
-        
-        self.visit(ctx.body())  # Process the loop body
-        
-        self.visit(ctx.expression())  # Evaluate the condition
-        
-        condition_result = self.operand_stack.pop()  # Get the result of the condition
-        if condition_result[1] != 'bool':
-            raise Exception('Condition expression must be boolean')
-        
-        end_loop_quad = self.quad_counter  # The quad where we evaluate the condition
-        
-        # Create a quad for the condition evaluation
-        quad = Cuadroplo('GOTOF', condition_result[0], None, None, self.current_function)
-        self.quad_list.append(quad)
-        self.quad_counter += 1
-        
-        # Create a quad for jumping back to the start of the loop if the condition is true
-        quad = Cuadroplo('GOTO', None, None, start_loop_quad, self.current_function)
-        self.quad_list.append(quad)
-        self.quad_counter += 1
-        
-        # Fill the false jump quad with the address of the quad after the loop
-        self.quad_list[end_loop_quad].result = self.quad_counter
-        
-        return self.visitChildren(ctx)
+        self.jump_stack.append(self.quad_counter)
+        self.visit(ctx.body())
+        self.visit(ctx.expression())
+        self.operator_stack.append('GOTOV')
+        pop_and_add(self)        
+
+        return 
 
 
     
 
     # Visit a parse tree produced by little_duckParser#condition.
     # Visit a parse tree produced by little_duckParser#condition.
-def visitCondition(self, ctx: little_duckParser.ConditionContext):
-    # Step 1: Evaluate the condition expression
-    self.visit(ctx.expression())
-    
-    # Step 2: Create a quad for the conditional jump
-    condition_result = self.operand_stack.pop()
-    if condition_result[1] != 'bool':
-        raise Exception('Condition expression must be boolean')
-    
-    quad = Cuadroplo('GOTOF', condition_result[0], None, None, self.current_function)
-    self.quad_list.append(quad)
-    self.quad_counter += 1
-    
-    # Save the position of the GOTOF quad to update it later
-    false_jump_index = self.quad_counter - 1
-    
-    # Step 3: Visit the body of the IF statement
-    self.visit(ctx.body())
-    
-    # Step 4: Handle the optional ELSE part
-    if ctx.condition0().getChildCount() > 0:
-        # Create a GOTO quad for the end of the IF body
-        quad = Cuadroplo('GOTO', None, None, None, self.current_function)
-        self.quad_list.append(quad)
-        self.quad_counter += 1
-        
-        # Save the position of the GOTO quad to update it later
-        end_if_jump_index = self.quad_counter - 1
-        
-        # Update the GOTOF quad to jump to the ELSE part
-        self.quad_list[false_jump_index].result = self.quad_counter
-        
-        # Visit the body of the ELSE statement
-        self.visit(ctx.condition0().body())
-        
-        # Update the GOTO quad to jump to the end of the ELSE part
-        self.quad_list[end_if_jump_index].result = self.quad_counter
-    else:
-        # If there is no ELSE part, update the GOTOF quad to jump to the end of the IF body
-        self.quad_list[false_jump_index].result = self.quad_counter
-    
-    return self.visitChildren(ctx)
+    def visitCondition(self, ctx: little_duckParser.ConditionContext):
+        self.visit(ctx.expression())
 
+        self.operator_stack.append('GOTOF')
+        pop_and_add(self)
+        self.jump_stack.append(self.quad_counter - 1)
 
-# Visit a parse tree produced by little_duckParser#condition0.
-def visitCondition0(self, ctx: little_duckParser.Condition0Context):
-    return self.visitChildren(ctx)
+        self.visit(ctx.body())
+        self.visit(ctx.condition0())
 
+        jump = self.jump_stack.pop()        
+        self.quad_list[jump].result = self.quad_counter
+        return 
 
 
     # Visit a parse tree produced by little_duckParser#condition0.
-    def visitCondition0(self, ctx:little_duckParser.Condition0Context):
-        return self.visitChildren(ctx)
+    def visitCondition0(self, ctx: little_duckParser.Condition0Context):
+        if ctx.ELSE():
+            print('ELSE')
+            self.operator_stack.append('GOTO')
+            pop_and_add(self)
+
+            jump = self.jump_stack.pop()        
+            self.quad_list[jump].result = self.quad_counter
+
+            self.jump_stack.append(self.quad_counter - 1)
+            self.visit(ctx.body())
+        return 
 
 
 
@@ -407,10 +362,30 @@ def add_cuad(self, operator, left_operand, right_operand):
         cuad = Cuadroplo(operator, right_operand[0], None, left_operand[0], self.current_function)
         self.quad_list.append(cuad)
         self.quad_counter += 1
+
     elif operator == 'PRNT':
         quad = Cuadroplo(operator, None, None, left_operand[0], self.current_function)
         self.quad_list.append(quad)
         self.quad_counter += 1
+
+    elif operator in ('GOTO'):
+        quad = Cuadroplo(operator, None, None, None, self.current_function)
+        self.quad_list.append(quad)
+        self.quad_counter += 1
+
+    elif operator in ('GOTOV'):
+        jump = self.jump_stack.pop()
+        quad = Cuadroplo(operator, left_operand[0], None, jump, self.current_function)
+        self.quad_list.append(quad)
+        self.quad_counter += 1
+
+    elif operator in ('GOTOF'):
+        quad = Cuadroplo(operator, left_operand[0], None, None, self.current_function)
+        self.quad_list.append(quad)
+        self.quad_counter += 1
+
+         
+
         
     else:
         result_type = check_cubo_semantico(operator, left_operand[1], right_operand[1])
@@ -428,17 +403,30 @@ def add_cuad(self, operator, left_operand, right_operand):
 
 
 def pop_and_add(self):
-    if self.operator_stack[-1] in ('PRNT', 'GOTO', 'GOTOF', 'GOTOV'):
+    if self.operator_stack[-1] in ('GOTO'):
+        print ('GOTO')
+        operator = self.operator_stack.pop()
+        add_cuad(self, operator, None, None)
+        return
+    
+    elif self.operator_stack[-1] in ('PRNT', 'GOTOV'):
         operator = self.operator_stack.pop()
         left_operand = self.operand_stack.pop()
         add_cuad(self, operator, left_operand, None)
         return
     
+    elif self.operator_stack[-1] in ('GOTOF'):
+        operator = self.operator_stack.pop()
+        left_operand = self.operand_stack.pop()
+        add_cuad(self, operator, left_operand, None)
+        return
 
-    operator = self.operator_stack.pop()
-    right_operand = self.operand_stack.pop()
-    left_operand = self.operand_stack.pop()
-    add_cuad(self, operator, left_operand, right_operand)
+
+    else: 
+        operator = self.operator_stack.pop()
+        right_operand = self.operand_stack.pop()
+        left_operand = self.operand_stack.pop()
+        add_cuad(self, operator, left_operand, right_operand)
 
 
 

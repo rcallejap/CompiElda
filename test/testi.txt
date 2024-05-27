@@ -14,7 +14,7 @@ program programaI;
                         c = 0;
                     };
                     printf(c);
-                }
+                }; 
             ];
             
             void funcion2 (x : float, y : float)[
