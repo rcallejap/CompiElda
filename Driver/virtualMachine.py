@@ -50,6 +50,9 @@ class VirtualMachine:
             elif op == 'PRNT':
                 self.printCuad(self.cuads[currCuad].result)
                 currCuad+=1
+            elif op == 'ENDL':
+                print("")
+                currCuad+=1
             elif op == 'GOTO':
                 currCuad = self.goto(self.cuads[currCuad].result)
             elif op == 'GOTOF':
@@ -135,7 +138,10 @@ class VirtualMachine:
 
     def printCuad(self, result):
         result = self.convertMem(result)
-        print(self.memory[result[0]][result[1]])
+        result = self.memory[result[0]][result[1]]
+        result = str(result)
+        result = result.replace('"', "" )
+        print(result, end="")
 
     def goto(self, result):
         return result

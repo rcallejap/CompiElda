@@ -31,6 +31,7 @@ class little_duckVisitor(ParseTreeVisitor):
         self.temp_counter = 0
 
         self.priority = {
+            'ENDL': 0, 
             'PRNT':0, 
             'GOTO':0,
             'GOTOF':0,
@@ -203,9 +204,10 @@ class little_duckVisitor(ParseTreeVisitor):
             self.operator_stack.append('PRNT')
             pop_and_add(self)
 
-        #self.operator_stack.append('PRNT')
-        #self.operand_stack.append('endl')
-        #pop_and_add(self)
+        self.operator_stack.append('ENDL')
+        pop_and_add(self)
+
+    
 
         return  
 
@@ -379,6 +381,11 @@ def add_cuad(self, operator, left_operand, right_operand):
         self.quad_list.append(cuad)
         self.quad_counter += 1
 
+    elif operator == 'ENDL':
+        quad = Cuadroplo(operator, None, None, None, self.current_function)
+        self.quad_list.append(quad)
+        self.quad_counter += 1
+
     elif operator == 'PRNT':
         quad = Cuadroplo(operator, None, None, left_operand.dir, self.current_function)
         self.quad_list.append(quad)
@@ -450,7 +457,7 @@ def pop_and_add(self):
         add_cuad(self, operator, None, None)
         return
     
-    elif self.operator_stack[-1] == ('PRNT') or self.operator_stack[-1] == 'GOTOV':
+    elif self.operator_stack[-1] == 'PRNT' or self.operator_stack[-1] == 'GOTOV':
         operator = self.operator_stack.pop()
         left_operand = self.operand_stack.pop()
         add_cuad(self, operator, left_operand, None)
@@ -460,6 +467,11 @@ def pop_and_add(self):
         operator = self.operator_stack.pop()
         left_operand = self.operand_stack.pop()
         add_cuad(self, operator, left_operand, None)
+        return
+    
+    elif self.operator_stack[-1] == 'ENDL':
+        operator = self.operator_stack.pop()
+        add_cuad(self, operator, None, None)
         return
 
 
