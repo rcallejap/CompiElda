@@ -1,16 +1,4 @@
 # recibe funcDir y agrega direccion de memoria a las variables
-
-# Generated from little_duck.g4 by ANTLR 4.13.0
-from antlr4 import *
-if "." in __name__:
-    from .little_duckParser import little_duckParser
-else:
-    from little_duckParser import little_duckParser
-
-from data_structures import Variable, VarTable, Function, FunctionDirectory, Cuadroplo
-from cubo_semantico import check_cubo_semantico
-
-
 class MemoryManager:
     def __init__(self, funcDir, constDir) : 
         self.funcDir = funcDir
@@ -54,19 +42,19 @@ class MemoryManager:
 
         for const in constDir.constants:
             if constDir.constants[const].type == "int":
-                self.memoryInt.append(constDir.constants[const].value)
+                self.memoryInt.append(int(constDir.constants[const].value))
                 constDir.constants[const].dir = 1000 + self.intCount
                 self.intCount += 1
             elif constDir.constants[const].type == "float":
-                self.memoryFloat.append(constDir.constants[const].value)
+                self.memoryFloat.append(float(constDir.constants[const].value))
                 constDir.constants[const].dir = 2000 + self.floatCount
                 self.floatCount += 1
             elif constDir.constants[const].type == "bool":
-                self.memoryBool.append(constDir.constants[const].value)
+                self.memoryBool.append(bool(constDir.constants[const].value))
                 constDir.constants[const].dir = 3000 + self.boolCount
                 self.boolCount += 1
             elif constDir.constants[const].type == "string":
-                self.memoryString.append(constDir.constants[const].value)
+                self.memoryString.append(str(constDir.constants[const].value))
                 constDir.constants[const].dir = 4000 + self.stringCount
                 self.stringCount += 1
 
@@ -89,9 +77,3 @@ class MemoryManager:
             self.memoryString.append(None)
             self.stringCount += 1
 
-        print("Memory updated")
-        print(self.memoryInt)
-        print(self.memoryFloat)
-        print(self.memoryBool)
-        print(self.memoryString)
-       

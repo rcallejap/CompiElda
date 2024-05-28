@@ -11,7 +11,8 @@ from cubo_semantico import check_cubo_semantico
 # This class defines a complete generic visitor for a parse tree produced by little_duckParser.
 
 
-class little_duckVisitor(ParseTreeVisitor):
+class little_duckVisitorTester(ParseTreeVisitor):
+
 
     def __init__(self, function_directory, constant_directory, memMan):
         self.function_directory = function_directory
@@ -375,12 +376,12 @@ def add_cuad(self, operator, left_operand, right_operand):
             print (left_operand, right_operand, operator)
             print ( 'Res: ', result_type)
             #raise Exception('Type mismatch')
-        cuad = Cuadroplo(operator, right_operand.dir, None, left_operand.dir, self.current_function)
+        cuad = Cuadroplo(operator, right_operand.name, None, left_operand.name, self.current_function)
         self.quad_list.append(cuad)
         self.quad_counter += 1
 
     elif operator == 'PRNT':
-        quad = Cuadroplo(operator, None, None, left_operand.dir, self.current_function)
+        quad = Cuadroplo(operator, None, None, left_operand.name, self.current_function)
         self.quad_list.append(quad)
         self.quad_counter += 1
 
@@ -391,12 +392,12 @@ def add_cuad(self, operator, left_operand, right_operand):
 
     elif operator == 'GOTOV':
         jump = self.jump_stack.pop()
-        quad = Cuadroplo(operator, left_operand.dir, None, jump, self.current_function)
+        quad = Cuadroplo(operator, left_operand.name, None, jump, self.current_function)
         self.quad_list.append(quad)
         self.quad_counter += 1
 
     elif operator == 'GOTOF':
-        quad = Cuadroplo(operator, left_operand.dir, None, None, self.current_function)
+        quad = Cuadroplo(operator, left_operand.name, None, None, self.current_function)
         self.quad_list.append(quad)
         self.quad_counter += 1
 
@@ -439,7 +440,7 @@ def add_cuad(self, operator, left_operand, right_operand):
         #Borrar esto
         #var = var.dir, ':', var.type, '=', var.dir
 
-        quad = Cuadroplo(operator, left_operand.dir, right_operand.dir, var.dir, self.current_function)
+        quad = Cuadroplo(operator, left_operand.name, right_operand.name, var.name, self.current_function)
         self.quad_list.append(quad)
         self.quad_counter += 1
 

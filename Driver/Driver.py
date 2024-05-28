@@ -5,6 +5,7 @@ from little_duckParser import little_duckParser
 from little_duckVisitor import little_duckVisitor
 from little_duckListener import little_duckListener
 from MemorryManager import MemoryManager
+from virtualMachine import VirtualMachine
 def main(argv):
     input_stream = FileStream(argv[1])
     lexer = little_duckLexer(input_stream)
@@ -21,7 +22,6 @@ def main(argv):
     constDir = listener.ConstantTable 
 
     mManager = MemoryManager(funcDir, constDir)
-
     MemorryCountArray = [mManager.intCount, mManager.floatCount, mManager.boolCount, mManager.stringCount]
     MemorryCountArrayCopy = MemorryCountArray.copy()
 
@@ -29,20 +29,15 @@ def main(argv):
     visitor = little_duckVisitor(funcDir, constDir, MemorryCountArrayCopy)
     visitor.visit(tree)
 
-    print ("Operator: ", visitor.operator_stack)
-    print ("Operand: ", visitor.operand_stack)
-
-    print("Quads: ")
-    i = 0
-    for Cuadroplo in visitor.quad_list:
-        print(f"{i} ", end="")
-        Cuadroplo.test_print()
-        i += 1
-    
-    print (MemorryCountArray)
-    print (MemorryCountArrayCopy)
-
+    #Memorry Manager
     mManager.update(MemorryCountArrayCopy)
+    memory = [[], mManager.memoryInt, mManager.memoryFloat, mManager.memoryBool, mManager.memoryString]
+    quads= visitor.quad_list
+
+    #Virtual Machine
+    virtualMachine = VirtualMachine(quads, memory)
+    virtualMachine.run()
+    
 
 
     

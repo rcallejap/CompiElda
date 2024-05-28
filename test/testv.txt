@@ -3,19 +3,10 @@ program programa1;
 
 
     main {
-       b = (a + 2) * 3 * 4 * 5 + 6 + 7 + 8 + 9 * 10  ;
-       a = (12 * 5) - 7;
-       printf(a);
-      
-       do {
-         a = a + 1;
-       } while (a < b); 
+      a = 0 + 1;
+      b = 0 + 2;
+      c = 0 + 3; 
 
-       if (a> b){
-         a = a + 1; 
-       };
+      printf(a,b,c);
 
-
-
-       
     } end

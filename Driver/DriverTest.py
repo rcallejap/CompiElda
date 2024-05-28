@@ -2,7 +2,7 @@ import sys
 from antlr4 import *
 from little_duckLexer import little_duckLexer
 from little_duckParser import little_duckParser
-from little_duckVisitor import little_duckVisitor
+from little_duckVisitorTester import little_duckVisitorTester
 from little_duckListener import little_duckListener
 from MemorryManager import MemoryManager
 def main(argv):
@@ -20,11 +20,13 @@ def main(argv):
     funcDir = listener.functionDirectory
     constDir = listener.ConstantTable 
 
-    MemoryManager(funcDir, constDir)
+    mManager = MemoryManager(funcDir, constDir)
 
+    MemorryCountArray = [mManager.intCount, mManager.floatCount, mManager.boolCount, mManager.stringCount]
+    MemorryCountArrayCopy = MemorryCountArray.copy()
 
     #entrega 3
-    visitor = little_duckVisitor(funcDir, constDir)
+    visitor = little_duckVisitorTester(funcDir, constDir, MemorryCountArrayCopy)
     visitor.visit(tree)
 
     print ("Operator: ", visitor.operator_stack)
@@ -36,6 +38,12 @@ def main(argv):
         print(f"{i} ", end="")
         Cuadroplo.test_print()
         i += 1
+    
+    print (MemorryCountArray)
+    print (MemorryCountArrayCopy)
+
+    mManager.update(MemorryCountArrayCopy)
+
 
 
 

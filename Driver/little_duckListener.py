@@ -154,6 +154,8 @@ class little_duckListener(ParseTreeListener):
 
     # Exit a parse tree produced by little_duckParser#print0.
     def exitPrint0(self, ctx:little_duckParser.Print0Context):
+        if ctx.CTE_STRING():
+            self.ConstantTable.add_constant(ctx.CTE_STRING().getText(), "string")
         pass
 
 
