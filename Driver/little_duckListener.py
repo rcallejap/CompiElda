@@ -304,6 +304,8 @@ class little_duckListener(ParseTreeListener):
 
     # Exit a parse tree produced by little_duckParser#factor0.
     def exitFactor0(self, ctx:little_duckParser.Factor0Context):
+        if ctx.MENOS():
+            self.ConstantTable.add_constant(0, "int")
         pass
 
 

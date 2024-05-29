@@ -1,4 +1,6 @@
 program programa1;
+var a, b : int; 
     main {
-    
+        a = 1;
+        b = -a;            
     } end

@@ -11,8 +11,8 @@ Todas las pruebas se encuentran en la carpeta "test":
     test1: test de programa 
     test2: test de variable y asignación 
     test3: test de print
-    test4: test de Func  
+    test4: test de Func  #no se implemento 
     test5: test de condicional 
     test6: test de ciclo 
-    testi: test de integración 
+    testF: test de integración 
  

@@ -1,5 +1,5 @@
 # Estrucutras de datos de cuadruplo
-class Cuadroplo:
+class Cuadruplo:
     def __init__ (self, op, left, right, result, scope):
         self.op = op
         self.left = left
@@ -86,10 +86,7 @@ class constant:
         self.type = vtype
         self.dir = None
         #remove 
-        self.name = value
 
-    def test_print(self):
-        print(f"{self.value} : {self.type}")
 
 class ConstantTable:
     def __init__(self):
@@ -102,7 +99,3 @@ class ConstantTable:
         self.constants[cons.value] = cons
         return 
 
-
-    def test_print(self):
-        for constant in self.constants.values():
-            constant.test_print()

@@ -3,11 +3,11 @@ cubo_semantico ={
         '+': {'int': 'int', 'float': 'float', 'string': 'Error'},
         '-': {'int': 'int', 'float': 'float', 'string': 'Error'},
         '*': {'int': 'int', 'float': 'float', 'string': 'Error'},
-        '/': {'int': 'float', 'float': 'float', 'string': 'Error'},
+        '/': {'int': 'int', 'float': 'float', 'string': 'Error'},
         '>': {'int': 'bool', 'float': 'bool', 'string': 'Error'},
         '<': {'int': 'bool', 'float': 'bool', 'string': 'Error'},
         '!=':{'int': 'bool', 'float': 'bool', 'string': 'Error'},
-        '=': {'int': 'int', 'float': 'error', 'string': 'Error'},
+        '=': {'int': 'int', 'float': 'Error', 'string': 'Error'},
 
     },
 
@@ -19,7 +19,7 @@ cubo_semantico ={
         '>': {'int': 'bool', 'float': 'bool', 'string': 'Error'},
         '<': {'int': 'bool', 'float': 'bool', 'string': 'Error'},
         '!=':{'int': 'bool', 'float': 'bool', 'string': 'Error'},
-        '=': {'int': 'error', 'float': 'float', 'string': 'Error'},
+        '=': {'int': 'Error', 'float': 'float', 'string': 'Error'},
     },
 
     'string': {

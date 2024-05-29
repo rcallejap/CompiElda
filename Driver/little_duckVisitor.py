@@ -5,7 +5,7 @@ if "." in __name__:
 else:
     from little_duckParser import little_duckParser
 
-from data_structures import Variable, VarTable, Function, FunctionDirectory, Cuadroplo
+from data_structures import Variable, VarTable, Function, FunctionDirectory, Cuadruplo
 from cubo_semantico import check_cubo_semantico
 
 # This class defines a complete generic visitor for a parse tree produced by little_duckParser.
@@ -113,6 +113,10 @@ class little_duckVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by little_duckParser#factor0.
     def visitFactor0(self, ctx:little_duckParser.Factor0Context):
+        if ctx.MENOS():
+            self.operator_stack.append('-')
+        else :
+            self.operator_stack.append('+')        
         return self.visitChildren(ctx)
 
 
@@ -121,19 +125,29 @@ class little_duckVisitor(ParseTreeVisitor):
         if ctx.ID():
             if self.current_function == 'global':
                 var = self.function_directory.global_var_table.variables[ctx.ID().getText()]
-                self.operand_stack.append(var)
+
             else:
-                var = self.function_directory.functions[self.current_function].var_table.variables[ctx.ID().getText()]
-                self.operand_stack.append(var)
+                var = self.function_directory.functions[self.current_function].var_table.variables[ctx.ID().getText()]    
+            
+            cero = self.constant_directory.constants[0]
+            self.operand_stack.append(cero)
+            self.operand_stack.append(var)
+            pop_and_add(self)
         return self.visitChildren(ctx)
     
 
     # Visit a parse tree produced by little_duckParser#cte.
     def visitCte(self, ctx:little_duckParser.CteContext):
         if ctx.CTE_INT():
-            self.operand_stack.append(self.constant_directory.constants[ctx.CTE_INT().getText()])
+            var = self.constant_directory.constants[ctx.CTE_INT().getText()]
         elif ctx.CTE_FLOAT():
-            self.operand_stack.append(self.constant_directory.constants[ctx.CTE_FLOAT().getText()])
+            var = self.constant_directory.constants[ctx.CTE_FLOAT().getText()]
+        
+        cero = self.constant_directory.constants[0]
+        self.operand_stack.append(cero)
+        self.operand_stack.append(var)
+        pop_and_add(self)
+
         return self.visitChildren(ctx)
     
 
@@ -373,37 +387,35 @@ def add_cuad(self, operator, left_operand, right_operand):
     if operator == '=':
         result_type = check_cubo_semantico(operator, left_operand.type , right_operand.type)
         if result_type == 'Error':
-            print ('error')
-            print (left_operand, right_operand, operator)
-            print ( 'Res: ', result_type)
-            #raise Exception('Type mismatch')
-        cuad = Cuadroplo(operator, right_operand.dir, None, left_operand.dir, self.current_function)
+            raise Exception('Type mismatch: canot assign' + left_operand.type + 'to' + right_operand.type)
+        cuad = Cuadruplo(operator, right_operand.dir, None, left_operand.dir, self.current_function)
         self.quad_list.append(cuad)
         self.quad_counter += 1
 
+
     elif operator == 'ENDL':
-        quad = Cuadroplo(operator, None, None, None, self.current_function)
+        quad = Cuadruplo(operator, None, None, None, self.current_function)
         self.quad_list.append(quad)
         self.quad_counter += 1
 
     elif operator == 'PRNT':
-        quad = Cuadroplo(operator, None, None, left_operand.dir, self.current_function)
+        quad = Cuadruplo(operator, None, None, left_operand.dir, self.current_function)
         self.quad_list.append(quad)
         self.quad_counter += 1
 
     elif operator == 'GOTO':
-        quad = Cuadroplo(operator, None, None, None, self.current_function)
+        quad = Cuadruplo(operator, None, None, None, self.current_function)
         self.quad_list.append(quad)
         self.quad_counter += 1
 
     elif operator == 'GOTOV':
         jump = self.jump_stack.pop()
-        quad = Cuadroplo(operator, left_operand.dir, None, jump, self.current_function)
+        quad = Cuadruplo(operator, left_operand.dir, None, jump, self.current_function)
         self.quad_list.append(quad)
         self.quad_counter += 1
 
     elif operator == 'GOTOF':
-        quad = Cuadroplo(operator, left_operand.dir, None, None, self.current_function)
+        quad = Cuadruplo(operator, left_operand.dir, None, None, self.current_function)
         self.quad_list.append(quad)
         self.quad_counter += 1
 
@@ -411,10 +423,7 @@ def add_cuad(self, operator, left_operand, right_operand):
     else:
         result_type = check_cubo_semantico(operator, left_operand.type, right_operand.type)
         if result_type == 'Error':
-            print ('error')
-            print (left_operand, right_operand, operator)
-            print ( 'Res: ', result_type)
-            #raise Exception('Type mismatch')
+            raise Exception('Type mismatch')
 
         dir =0 
         if result_type== 'int':
@@ -446,7 +455,7 @@ def add_cuad(self, operator, left_operand, right_operand):
         #Borrar esto
         #var = var.dir, ':', var.type, '=', var.dir
 
-        quad = Cuadroplo(operator, left_operand.dir, right_operand.dir, var.dir, self.current_function)
+        quad = Cuadruplo(operator, left_operand.dir, right_operand.dir, var.dir, self.current_function)
         self.quad_list.append(quad)
         self.quad_counter += 1
 

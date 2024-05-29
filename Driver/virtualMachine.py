@@ -19,7 +19,12 @@ class VirtualMachine:
         self.memory = memory
         self.size = (len(cuads)-1)
 
-    def run(self):
+    def run(self, debug = False):
+        if debug:
+            print("memoria inicial: ", self.memory)
+            for cuad in self.cuads:
+                print(cuad.op, cuad.left, cuad.right, cuad.result)
+
         currCuad = 0
         while currCuad<= self.size:
             op = self.cuads[currCuad].op
@@ -62,6 +67,9 @@ class VirtualMachine:
             else:
                 currCuad+=1
 
+        if debug:
+            print("memoria final: ", self.memory)
+
 
     def convertMem(self, num):
         num = str(num)
@@ -102,15 +110,19 @@ class VirtualMachine:
         result = self. convertMem(result)
         self.checkNone(left)
         self.checkNone(right)
-        self.memory[result[0]][result[1]] = self.memory[left[0]][left[1]] * self.memory[right[0]][right[1]]
+        self.memory[result[0]][result[1]] = round(self.memory[left[0]][left[1]] * self.memory[right[0]][right[1]], 8)
 
     def division(self, left, right, result):
+        
         left = self.convertMem(left)
         right = self.convertMem(right)
         result = self. convertMem(result)
         self.checkNone(left)
-        self.checkNone(right)
-        self.memory[result[0]][result[1]] = self.memory[left[0]][left[1]] / self.memory[right[0]][right[1]]
+        self.checkNone(right)        
+        if result[0] == 1: 
+            self.memory[result[0]][result[1]] = self.memory[left[0]][left[1]] // self.memory[right[0]][right[1]]
+        else:
+            self.memory[result[0]][result[1]] = round(self.memory[left[0]][left[1]] / self.memory[right[0]][right[1]], 8)
 
     def mayor(self, left, right, result):
         left = self.convertMem(left)
