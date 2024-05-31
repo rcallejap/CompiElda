@@ -105,7 +105,7 @@ main {
 printf("________________");
 printf("Prueba if Else");
 
-if (a> 20){
+if (a - 20 > 20){
   printf ("a es mayor que 20"); 
   printf("a = ", a);
 }else {
